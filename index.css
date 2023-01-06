@@ -1,0 +1,328 @@
+@import url(./vendor/normalize.css);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&display=swap');
+
+.page {
+  margin: 0;
+  background: #000;
+  position: relative;
+  font-family: 'Inter', sans-serif, Arial, Helvetica, sans-serif;
+  /* font-family - INTER?? */
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color: rgba(000, 000, 000, 0.8);
+  z-index: 2;
+  top: 0;
+  display: none;
+}
+
+
+/* form */
+
+.overlay_active {
+  display: block;
+}
+
+.form {
+  position: absolute;
+  width: 430px;
+  height: 330px;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  display: block;
+  z-index: 3;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  top: 200px;
+}
+
+.form__title {
+  margin: 34px auto 54px 36px;
+  text-align: start;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29.05px;
+}
+
+.form__input {
+  box-sizing: border-box;
+  margin: 30px 36px 30px 36px;
+  display: block;
+  border: none;
+  border-bottom: 1px solid #000;
+  width: calc(100% - 72px);
+  padding: 0 0 13px 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.94px;
+}
+
+.form__input:focus {
+  outline: none;
+}
+
+.form__btn {
+  margin-top: 18px;
+  background-color: #000;
+  color: white;
+  text-align: center;
+  width: calc(100% - 72px);
+  padding: 18px 0 18px 0;
+  font-size: 18px;
+  line-height: 21.78px;
+
+}
+
+.form__btn:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.form__close-icon {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 32px;
+  height: 32px;
+}
+
+.form__close-icon:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+
+
+
+/* Секция header] */
+
+
+
+.header {
+  max-width: 880px;
+  margin: 45px auto 0 auto;
+  border-bottom: 1px solid #545454;
+  box-sizing: border-box;
+}
+
+.header__logo {
+  margin-bottom: 37px;
+}
+
+/* Секция профиля */
+
+.profile {
+  max-width: 880px;
+  margin: 40px auto 50px auto;
+  display: flex;
+  flex-wrap: wrap;
+  color: #fff;
+  justify-content: space-between;
+}
+
+.profile__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.profile__avatar {
+  max-width: 120px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+
+.profile__info {
+  margin-right: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile__title {
+  margin: 0 0 9px 0;
+  font-weight: 500;
+  font-size: 41.9px;
+  line-height: 48px;
+}
+
+.profile__subtitle {
+  margin: 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21.78px;
+}
+
+.profile__btn {
+  background-color: inherit;
+  color: #fff;
+  border: 1px solid #fff;
+  box-sizing: border-box;
+  align-self: center;
+}
+
+.profile__btn_edit {
+  font-size: 0;
+  padding: 6px;
+  vertical-align: middle;
+  margin-left: 7px;
+}
+
+.profile__btn_edit:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.profile__btn-pencil {
+  width: 10px;
+  height: 10px;
+  fill: #fff;
+}
+
+.profile__btn_add {
+  border-width: 2px;
+  font-size: 0;
+  padding: 12px 62px;
+}
+
+.profile__btn_add:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+
+.profile__btn-plus {
+  width: 22px;
+  height: 22px;
+  fill: #fff;
+  margin: 0 0 0 auto;
+}
+
+
+
+/* Секция gallery */
+.gallery {
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 20px;
+  column-gap: 17px;
+  font-size: 0;
+}
+
+.card {
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px;
+  overflow: hidden;
+
+}
+
+.card__wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  margin: 25px 20px 25px 21px;
+}
+
+.card__image {
+  max-width: 282px;
+  max-height: 282px;
+  margin: 0;
+  padding: 0;
+}
+
+.card__title {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29.05px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0;
+}
+
+.card__btn {
+  background-color: #fff;
+  color: #000;
+  border: none;
+  padding: 0;
+}
+
+.card__btn:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+
+.card__btn-like {
+  width: 22px;
+  height: 19px;
+  fill: #000;
+}
+
+/* footer */
+
+.footer {
+  max-width: 880px;
+  margin: 67px auto 60px auto;
+  color: #545454;
+}
+
+.footer__text {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 21.78px;
+}
+
+
+@media screen and (max-width: 620px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 17px;
+    column-gap: 20px;
+  }
+
+  .card__image {
+    max-width: 350px;
+    max-height: none;
+  }
+
+  .profile {
+    display: block;
+    text-align: center;
+  }
+}
+
+
+@media screen and (max-width: 520px) {
+  .cards {
+    grid-template-columns: repeat(1, 1fr);
+    row-gap: 17px;
+    column-gap: 20px;
+  }
+
+  .card__image {
+    max-width: 100%;
+    max-height: none;
+  }
+
+  .profile__wrapper {
+    display: block;
+  }
+
+  .profile__btn_add {
+    margin: 36px auto;
+    width: calc(100% - 38px);
+  }
+}
