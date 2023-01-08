@@ -1,12 +1,37 @@
 @import url(./vendor/normalize.css);
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;900&display=swap');
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("./vendor/fonts/Inter-Regular.woff2") format("woff2"),
+    url("./vendor/fonts/Inter-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("./vendor/fonts/Inter-Medium.woff2") format("woff2"),
+    url("./vendor/fonts/Inter-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("./vendor/fonts/Inter-Bold.woff2") format("woff2"),
+    url("./vendor/fonts/Inter-Bold.woff") format("woff");
+}
 
 .page {
   margin: 0;
   background: #000;
   position: relative;
   font-family: 'Inter', sans-serif, Arial, Helvetica, sans-serif;
-  /* font-family - INTER?? */
 }
 
 .overlay {
@@ -22,7 +47,7 @@
 
 /* pop-up */
 
-.overlay_active {
+.overlay_opened {
   display: block;
 }
 
@@ -39,7 +64,7 @@
   margin-right: auto;
   left: 0;
   right: 0;
-  margin-top: 27.2vh;
+  margin-top: 195px;
 }
 
 .pop-up__title {
@@ -52,19 +77,15 @@
 
 .pop-up__input {
   box-sizing: border-box;
-  margin: 30px 36px 30px 36px;
+  margin: 25px 36px 25px 36px;
   display: block;
   border: none;
   border-bottom: 1px solid rgba(000, 000, 000, 0.2);
   width: calc(100% - 72px);
-  padding: 0 0 8.5px 0;
+  padding: 5px 0 8.5px 0;
   font-size: 14px;
   font-weight: 400;
   line-height: 16.94px;
-}
-
-.pop-up__input:focus {
-  outline: none;
 }
 
 .pop-up__btn {
@@ -136,7 +157,7 @@
 .profile__avatar {
   max-width: 120px;
   border-radius: 50%;
-  margin-right: 30px;
+  margin-right: 31px;
 }
 
 .profile__info {
@@ -173,7 +194,7 @@
   font-size: 0;
   padding: 6px;
   vertical-align: middle;
-  margin-left: 7px;
+  margin-left: 8px;
 }
 
 .profile__btn_edit:hover {
@@ -269,7 +290,6 @@
   cursor: pointer;
 }
 
-
 .card__btn-like {
   width: 22px;
   height: 19px;
@@ -342,14 +362,14 @@
     font-size: 18px;
     line-height: 22px;
     text-align: center;
-    margin: 26px 9px 75px auto;
+    margin: 26px 9px 70px auto;
   }
 
   .pop-up__close-icon {
     width: 20px;
     height: 20px;
     right: 0;
-    top: -35px;
+    top: -36px;
   }
 
   .pop-up__input {
@@ -359,7 +379,7 @@
   }
 
   .pop-up__btn {
-    margin-top: 16px;
+    margin-top: 20px;
     width: calc(100% - 44px);
     font-size: 14px;
     line-height: 17px;
@@ -368,6 +388,10 @@
 }
 
 @media screen and (max-width: 520px) {
+
+  .pop-up {
+    margin-top: 123px;
+  }
 
   .header__logo {
     max-width: 103.74px;

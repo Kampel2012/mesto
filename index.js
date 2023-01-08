@@ -18,7 +18,7 @@ let profileBtnEdit = profile.querySelector('.profile__btn_edit')
 let overlayCloseBtn = document.querySelector('.pop-up__close-icon')
 
 profileBtnEdit.addEventListener('click', () => {
-  overlay.classList.add('overlay_active')
+  overlay.classList.add('overlay_opened')
   overlay.querySelector('.input-name').value = profile.querySelector('.profile__name').outerText
   overlay.querySelector('.input-job').value = profile.querySelector('.profile__subtitle').outerText
 })
@@ -26,14 +26,13 @@ profileBtnEdit.addEventListener('click', () => {
 overlayCloseBtn.addEventListener('click', closeOverlay)
 
 function closeOverlay() {
-  overlay.classList.remove('overlay_active')
+  overlay.classList.remove('overlay_opened')
 }
 
 overlay.querySelector('.pop-up').addEventListener('submit', (e) => {
   e.preventDefault()
   let valueName = overlay.querySelector('.input-name').value
   let valueJob = overlay.querySelector('.input-job').value
-
   if ((valueName == '') || (valueJob == '')) {
     alert('Заполните все поля ввода!')
   } else {
