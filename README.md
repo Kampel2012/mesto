@@ -7,16 +7,16 @@
 * Технологии
 * Организационная структура
 
-**Технологии**
+## **Технологии**
 
+:white_check_mark: JS
+<br>
 :white_check_mark: Flexbox
 <br>
 :white_check_mark: @media
 <br>
-:white_check_mark: JS
-<br>
 
-**Организационная структура**
+## **Организационная структура**
 
 :zap: Работа выполнена по методолгии `БЭМ (Nested)` :fire:
 
@@ -29,4 +29,5 @@ ____
 ____
 
 
+![kofe-karandasi-rabocij-stol-noutbuk-smartfon](https://user-images.githubusercontent.com/117913798/211205363-3b37f67e-40fd-4b22-be5c-4d72cad08a17.jpg)
 
