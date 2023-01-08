@@ -15,12 +15,14 @@
   </header>
 
   <div class="overlay">
-    <form class="form">
-      <h2 class="form__title">Редактировать профиль</h2>
-      <input class="form__input input-name" type="text" name="form__input-name" id="form__input-name">
-      <input class="form__input input-job" type="text" name="form__input-job" id="form__input-job">
-      <button class="form__btn" type="button">Сохранить</button>
-      <img class="form__close-icon" src="./images/Close Icon.png">
+    <form class="pop-up">
+      <h1 class="pop-up__title">Редактировать профиль</h1>
+      <input class="pop-up__input input-name" type="text" name="pop-up__input-name" id="pop-up__input-name"
+        placeholder="Имя профиля">
+      <input class="pop-up__input input-job" type="text" name="pop-up__input-job" id="pop-up__input-job"
+        placeholder="Вид деятельности">
+      <img class="pop-up__close-icon" src="./images/Close Icon.png">
+      <button class="pop-up__btn" type="submit">Сохранить</button>
     </form>
   </div>
 
@@ -28,14 +30,14 @@
     <div class="profile__wrapper">
       <img src="./images/prof-avatar.jpg" alt="Аватар профиля" class="profile__avatar">
       <div class="profile__info">
-        <h1 class="profile__title">Жак-Ив Кусто
+        <div class="profile__title"><span class="profile__name">Жак-Ив Кусто</span>
           <button class="profile__btn profile__btn_edit" type="button">
             <svg class="profile__btn-pencil">
               <path
                 d="M10 1.32827L2.60377 8.7666L1.28302 7.41936L8.66038 0L10 1.32827ZM0 10L1.96226 9.41177L0.584906 8.08349L0 10Z" />
             </svg>
           </button>
-        </h1>
+        </div>
         <p class="profile__subtitle">Исследователь океана</p>
       </div>
 
@@ -122,8 +124,6 @@
       </div>
     </div>
   </section>
-
-
 
   <footer class="footer">
     <p class="footer__text">&#169; 2023 Глазунов Антон</p>
