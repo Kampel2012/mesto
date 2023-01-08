@@ -1,0 +1,11 @@
+.card__btn {
+  background-color: #fff;
+  color: #000;
+  border: none;
+  padding: 0;
+}
+
+.card__btn:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}

@@ -1,0 +1,19 @@
+.profile__btn_edit {
+  font-size: 0;
+  padding: 6px;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+.profile__btn_edit:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 520px) {
+  .profile__btn_edit {
+    padding: 4.25px;
+    margin-left: 0;
+    margin-top: 5px;
+  }
+}

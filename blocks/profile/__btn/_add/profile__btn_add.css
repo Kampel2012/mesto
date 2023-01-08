@@ -1,0 +1,18 @@
+.profile__btn_add {
+  border-width: 2px;
+  font-size: 0;
+  padding: 15px 62px;
+}
+
+.profile__btn_add:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 520px) {
+  .profile__btn_add {
+    margin: 32px auto 36px auto;
+    width: calc(100% - 38px);
+    border-radius: 2px;
+  }
+}

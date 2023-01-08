@@ -1,0 +1,11 @@
+.profile__icon-pencil {
+  width: 10px;
+  height: 10px;
+}
+
+@media screen and (max-width: 520px) {
+  .profile__icon-pencil {
+    width: 7.5px;
+    height: 7.5px;
+  }
+}
