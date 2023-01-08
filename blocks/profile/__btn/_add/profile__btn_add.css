@@ -1,7 +1,7 @@
 .profile__btn_add {
   border-width: 2px;
   font-size: 0;
-  padding: 15px 62px;
+  padding: 12px 62px;
 }
 
 .profile__btn_add:hover {
@@ -14,5 +14,7 @@
     margin: 32px auto 36px auto;
     width: calc(100% - 38px);
     border-radius: 2px;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
 }
