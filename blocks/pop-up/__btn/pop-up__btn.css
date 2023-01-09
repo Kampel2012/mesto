@@ -1,5 +1,5 @@
 .pop-up__btn {
-  margin-top: 18px;
+  margin: 18px 0 37px 0;
   background-color: #000;
   color: white;
   text-align: center;
@@ -19,6 +19,7 @@
 @media screen and (max-width: 660px) {
   .pop-up__btn {
     margin-top: 20px;
+    margin-bottom: 25px;
     width: calc(100% - 44px);
     font-size: 14px;
     line-height: 17px;

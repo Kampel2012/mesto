@@ -2,6 +2,7 @@
   border-width: 2px;
   font-size: 0;
   padding: 12px 62px;
+  border-radius: 2px;
 }
 
 .profile__btn_add:hover {
@@ -13,7 +14,6 @@
   .profile__btn_add {
     margin: 32px auto 36px auto;
     width: calc(100% - 38px);
-    border-radius: 2px;
     padding-top: 15px;
     padding-bottom: 15px;
   }

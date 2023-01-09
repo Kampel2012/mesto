@@ -1,14 +1,14 @@
 .pop-up__close-icon {
   position: absolute;
-  top: -40px;
-  right: -40px;
   width: 32px;
   height: 32px;
+  right: -40px;
+  top: -40px;
 }
 
 .pop-up__close-icon:hover {
   cursor: pointer;
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 660px) {
