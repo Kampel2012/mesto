@@ -1,9 +1,11 @@
 .profile__btn_type_add {
-  border-width: 2px;
-  font-size: 0;
+  width: 150px;
+  height: 50px;
+  border: 2px solid #FFFFFF;
   border-radius: 2px;
-  box-sizing: border-box;
-  margin: 0;
+  background-image: url(../../../../images/profile__btn-plus.svg);
+  background-position: center;
+  background-repeat: no-repeat;
   padding: 0;
   flex-shrink: 0;
 }
@@ -17,5 +19,6 @@
   .profile__btn_type_add {
     margin: 32px auto 36px auto;
     width: 282px;
+    background-size: 16px;
   }
 }
