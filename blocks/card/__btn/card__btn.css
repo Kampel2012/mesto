@@ -1,8 +1,13 @@
 .card__btn {
-  background-color: transparent ;
-  color: #000;
+  background-color: transparent;
   border: none;
   padding: 0;
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../images/card__btn.svg);
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+  align-self: center;
 }
 
 .card__btn:hover {

@@ -1,0 +1,28 @@
+.pop-up__btn_type_submit {
+  margin: 24px 0 36px 0;
+  width: calc(100% - 72px);
+  padding: 16px 0 16px 0;
+  font-size: 18px;
+  line-height: 18px;
+  border-radius: 2px;
+}
+
+.pop-up__btn_type_submit:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 680px) {
+  .pop-up__btn_type_submit {
+    margin-top: 20px;
+    margin-bottom: 25px;
+    width: calc(100% - 44px);
+    font-size: 14px;
+    line-height: 17px;
+    padding: 14px 0 15px 0;
+  }
+}
+
+
+
+

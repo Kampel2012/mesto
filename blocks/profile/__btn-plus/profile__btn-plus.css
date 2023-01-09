@@ -1,11 +1,17 @@
 .profile__btn-plus {
+  background-image: url(../../../images/profile__btn-plus.svg);
+  background-repeat: no-repeat;
+  background-position: center;
   width: 22px;
   height: 22px;
+  margin: 12px 62px;
+  padding: 0;
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 680px) {
   .profile__btn-plus {
-  width: 16px;
-  height: 16px;
+    width: 16px;
+    height: 16px;
+    margin: 15px auto;
   }
 }

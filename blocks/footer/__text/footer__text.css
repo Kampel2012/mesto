@@ -5,9 +5,15 @@
   margin: 0;
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 680px) {
   .footer__text {
     margin-left: 19px;
+  }
+}
+
+
+@media screen and (max-width: 520px) {
+  .footer__text {
     font-size: 14px;
     line-height: 17px;
   }

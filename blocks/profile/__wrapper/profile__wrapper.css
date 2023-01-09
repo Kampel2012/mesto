@@ -3,7 +3,7 @@
   flex-wrap: wrap;
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 680px) {
   .profile__wrapper {
     display: block;
   }

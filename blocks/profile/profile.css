@@ -7,16 +7,16 @@
   justify-content: space-between;
 }
 
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 680px) {
   .profile {
     text-align: center;
+    display: block;
+    margin-bottom: 0;
   }
 }
 
 @media screen and (max-width: 520px) {
   .profile {
-    display: block;
-    margin-bottom: 0;
     margin-top: 41px;
   }
 }
