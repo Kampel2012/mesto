@@ -8,15 +8,15 @@ let profileJob = profile.querySelector('.profile__subtitle')
 
 function popUpOpenOverlay() {
   popUp.classList.add('pop-up_opened')
-  popUp.querySelector('.pop-up__input-name').value = profileName.textContent
-  popUp.querySelector('.pop-up__input-job').value = profileJob.textContent
+  popUp.querySelector('.pop-up__input_type_name').value = profileName.textContent
+  popUp.querySelector('.pop-up__input_type_job').value = profileJob.textContent
 }
 
 profileEditBtn.addEventListener('click', popUpOpenOverlay)
 
 function popUpValueEdit() {
-  let valueInputName = popUp.querySelector('.pop-up__input-name').value
-  let valueInputJob = popUp.querySelector('.pop-up__input-job').value
+  let valueInputName = popUp.querySelector('.pop-up__input_type_name').value
+  let valueInputJob = popUp.querySelector('.pop-up__input_type_job').value
   if ((valueInputName == '') || (valueInputJob == '')) {
     alert('Заполните все поля ввода!')
   } else {

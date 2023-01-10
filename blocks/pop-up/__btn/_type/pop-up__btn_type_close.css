@@ -1,5 +1,5 @@
 .pop-up__btn_type_close {
-  background-color: #000;
+  background-color: transparent;
   background-image: url(../../../../images/Close-Icon.svg);
   background-size: cover;
   position: absolute;

@@ -8,8 +8,6 @@
 @import url(../blocks/pop-up/__btn/_type/pop-up__btn_type_close.css);
 @import url(../blocks/pop-up/__btn/_type/pop-up__btn_type_submit.css);
 @import url(../blocks/pop-up/__input/pop-up__input.css);
-@import url(../blocks/pop-up/__input/_name/pop-up__input_name.css);
-@import url(../blocks/pop-up/__input/_job/pop-up__input_job.css);
 @import url(../blocks/pop-up/__title/pop-up__title.css);
 @import url(../blocks/pop-up/__form/pop-up__form.css);
 @import url(../blocks/profile/profile.css);

@@ -18,3 +18,9 @@
     max-width: 189px;
   }
 }
+
+@media screen and (max-width: 360px) {
+  .profile__name {
+    margin-left: 25px;
+  }
+}
