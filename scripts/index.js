@@ -3,11 +3,12 @@ let profileEditBtn = profile.querySelector('.profile__btn_type_edit');
 let profileName = profile.querySelector('.profile__name');
 let profileJob = profile.querySelector('.profile__subtitle');
 let overlayAddBtn = profile.querySelector('.profile__btn_type_add');
-
+let popUpImageCard = document.querySelector('.pop-up_data_image-card');
 let popUpCardAdd = document.querySelector('.pop-up_data_cards');
 let popUpFormCards = popUpCardAdd.querySelector('.pop-up__form_data_cards');
 let popUpProfileEdit = document.querySelector('.pop-up_data_profile');
 let popUpFormProfile = popUpProfileEdit.querySelector('.pop-up__form_data_profile');
+let popUpFullImgCard = document.querySelector('.pop-up_data_image-card');
 
 let overlayCloseBtn = document.querySelectorAll('.pop-up__btn_type_close');
 let gallery = document.querySelector('.gallery');
@@ -41,11 +42,28 @@ const initialCards = [
 
 /* for test */
 
-
-
-
+// https://stackoverflow.com/questions/3331353/transitions-on-the-css-display-property
+// изначально поставить хейт = 0, опасити 0, потом опасити 1, хейт авто или по значению, это все в класс/модификтор актив? и транзишн опасити (не забыть про оверфлоу хидден)
 
 /* for test END */
+
+
+gallery.addEventListener('click', e => {
+  let box = e.target.closest('.card__image');
+  if (box) {
+    exportImageFromCard(box);
+    popUpOpenOverlay(popUpImageCard);
+  }
+});
+
+function exportImageFromCard(box) {
+  let imageItem = document.querySelector('.pop-up__image-card');
+  imageItem.src = box.src;
+  imageItem.alt = box.alt;
+  document.querySelector('.pop-up__subtitle').textContent = box.alt;
+}
+
+
 
 function cardRemove(e) {
   if (e.target.classList.contains('card__btn_type_delete')) {
@@ -86,15 +104,13 @@ function clearInput(box) {
 }
 
 overlayCloseBtn.forEach(item => {
-  if (item.closest('.pop-up_data_cards')) {
-    item.addEventListener('click', e => {
-      popUpCloseOverlay(popUpCardAdd);
-      let box = item.closest('.pop-up_data_cards');
+  item.addEventListener('click', () => {
+    let box = item.closest('.pop-up');
+    popUpCloseOverlay(box);
+    if (box === popUpCardAdd) {
       clearInput(box);
-    });
-  } else if (item.closest('.pop-up_data_profile')) {
-    item.addEventListener('click', () => popUpCloseOverlay(popUpProfileEdit));
-  }
+    }
+  });
 });
 
 function popUpCloseOverlay(popUp) {

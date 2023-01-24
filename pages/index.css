@@ -22,6 +22,7 @@
 @import url(../blocks/profile/__wrapper/profile__wrapper.css);
 @import url(../blocks/pop-up/_opened/pop-up_opened.css);
 @import url(../blocks/pop-up/__container/pop-up__container.css);
+@import url(../blocks/pop-up/__container/_data_image-card/pop-up__container_data_image-card.css);
 @import url(../blocks/gallery/gallery.css);
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__btn/card__btn.css);
@@ -45,4 +46,24 @@
 .card__btn_type_delete:hover {
   opacity: 0.6;
   cursor: pointer;
+}
+
+
+.pop-up__subtitle {
+  text-align: start;
+  margin: 10px 0 0 0;
+  color: white;
+  font-size: 12px;
+  line-height: 14.52px;
+  font-weight: 400;
+}
+
+.pop-up__image-card {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
+.pop-up__container_data_image-card {
+  width: unset;
+  background: transparent;
 }
