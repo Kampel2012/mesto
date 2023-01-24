@@ -13,11 +13,11 @@
       <img class="header__logo" src="./images/logo.svg" alt="Логотип" />
     </header>
 
-    <div class="pop-up">
+    <div class="pop-up pop-up_data_profile">  <!-- Поп ап для профиля -->
       <div class="pop-up__container">
         <h2 class="pop-up__title">Редактировать профиль</h2>
         <button type="button" class="pop-up__btn pop-up__btn_type_close"></button>
-        <form class="pop-up__form" name="pop-up-form-profile-edit">
+        <form class="pop-up__form pop-up__form_data_profile" name="pop-up-form-profile-edit">
           <input
             class="pop-up__input pop-up__input_type_name"
             type="text"
@@ -31,6 +31,30 @@
             name="pop-up__input-job"
             id="pop-up__input-job"
             placeholder="Вид деятельности"
+          />
+          <button class="pop-up__btn pop-up__btn_type_submit" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="pop-up pop-up_data_cards"> <!-- Поп ап для добавления новой карточки -->
+      <div class="pop-up__container">
+        <h2 class="pop-up__title">Новое место</h2>
+        <button type="button" class="pop-up__btn pop-up__btn_type_close"></button>
+        <form class="pop-up__form pop-up__form_data_cards" name="pop-up-form-profile-edit">
+          <input
+            class="pop-up__input pop-up__input_type_placeName"
+            type="text"
+            name="pop-up__input-placeName"
+            id="pop-up__input-placeName"
+            placeholder="Название"
+          />
+          <input
+            class="pop-up__input pop-up__input_type_placeLink"
+            type="text"
+            name="pop-up__input-placeLink"
+            id="pop-up__input-placeLink"
+            placeholder="Ссылка на картинку"
           />
           <button class="pop-up__btn pop-up__btn_type_submit" type="submit">Сохранить</button>
         </form>
