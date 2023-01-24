@@ -41,6 +41,17 @@ const initialCards = [
 
 /* for test */
 
+function switchLikeActive(e) {
+  let btnLikeTarget = e.target
+  if (btnLikeTarget.closest('.card__btn') ){
+    btnLikeTarget.classList.toggle('card__btn_active')
+  }
+}
+gallery.addEventListener('click', switchLikeActive)
+
+
+/* for test END */
+
 function addNewCard() {
   let placeNameInput = document.querySelector('.pop-up__input_type_placeName');
   let placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
@@ -63,7 +74,6 @@ function clearInput(box) {
   box.querySelectorAll('.pop-up__input').forEach(item => (item.value = ''));
 }
 
-/* for test END */
 
 overlayCloseBtn.forEach(item => {
   if (item.closest('.pop-up_data_cards')) {
