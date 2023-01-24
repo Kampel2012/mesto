@@ -41,6 +41,11 @@ const initialCards = [
 
 /* for test */
 
+
+
+
+/* for test END */
+
 function switchLikeActive(e) {
   let btnLikeTarget = e.target
   if (btnLikeTarget.closest('.card__btn') ){
@@ -48,9 +53,6 @@ function switchLikeActive(e) {
   }
 }
 gallery.addEventListener('click', switchLikeActive)
-
-
-/* for test END */
 
 function addNewCard() {
   let placeNameInput = document.querySelector('.pop-up__input_type_placeName');
