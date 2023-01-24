@@ -69,7 +69,7 @@ function addNewCard() {
   if (placeNameInput.value === '' || placeLinkInput.value === '') {
     alert('Необходимо заполнить все поля');
   } else {
-    initialCards.unshift({ name: placeNameInput.value, link: placeLinkInput.value });
+    initialCards.push({ name: placeNameInput.value, link: placeLinkInput.value });
     createCard({ name: placeNameInput.value, link: placeLinkInput.value });
   }
 }
@@ -111,11 +111,11 @@ function createCard(item) {
   cardImage.alt = item.name;
   let cardTitle = cardElement.querySelector('.card__title');
   cardTitle.textContent = item.name;
-  gallery.append(cardElement);
+  gallery.prepend(cardElement);
 }
 
 function renderCards() {
-  for (item of initialCards) {
+  for (item of initialCards.reverse()) {
     createCard(item);
   }
 }
