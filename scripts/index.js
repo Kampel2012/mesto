@@ -41,26 +41,45 @@ const initialCards = [
 
 /* for test */
 
-
-
-
-/* for test END */
-
-
-overlayCloseBtn.forEach(item => {
-  item.addEventListener('click', () => popUpCloseOverlay(popUpProfileEdit))
-  item.addEventListener('click', () => popUpCloseOverlay(popUpCardAdd))
-})
-
-
-function popUpCloseOverlay(popUp) {
-  popUp.classList.remove('pop-up_opened');
+function addNewCard() {
+  let placeNameInput = document.querySelector('.pop-up__input_type_placeName');
+  let placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
+  if (placeNameInput.value === '' || placeLinkInput.value === '') {
+    alert('Необходимо заполнить все поля');
+  } else {
+    initialCards.unshift({ name: placeNameInput.value, link: placeLinkInput.value });
+    createCard({ name: placeNameInput.value, link: placeLinkInput.value });
+  }
 }
 
 popUpFormCards.addEventListener('submit', e => {
   e.preventDefault();
+  addNewCard();
   popUpCloseOverlay(popUpCardAdd);
+  clearInput(e.currentTarget);
 });
+
+function clearInput(box) {
+  box.querySelectorAll('.pop-up__input').forEach(item => (item.value = ''));
+}
+
+/* for test END */
+
+overlayCloseBtn.forEach(item => {
+  if (item.closest('.pop-up_data_cards')) {
+    item.addEventListener('click', (e) => {
+      popUpCloseOverlay(popUpCardAdd);
+      let box = item.closest('.pop-up_data_cards');
+      clearInput(box)
+    });
+  } else if (item.closest('.pop-up_data_profile')) {
+    item.addEventListener('click', () => popUpCloseOverlay(popUpProfileEdit));
+  }
+});
+
+function popUpCloseOverlay(popUp) {
+  popUp.classList.remove('pop-up_opened');
+}
 
 overlayAddBtn.addEventListener('click', () => popUpOpenOverlay(popUpCardAdd));
 
@@ -75,7 +94,13 @@ function createCard(item) {
   gallery.append(cardElement);
 }
 
-initialCards.forEach(item => createCard(item));
+function renderCards() {
+  for (item of initialCards) {
+    createCard(item);
+  }
+}
+
+renderCards();
 
 profileEditBtn.addEventListener('click', () => {
   popUpExportValueToInput(popUpProfileEdit);
