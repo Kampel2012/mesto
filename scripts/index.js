@@ -9,8 +9,7 @@ let popUpFormCards = popUpCardAdd.querySelector('.pop-up__form_data_cards');
 let popUpProfileEdit = document.querySelector('.pop-up_data_profile');
 let popUpFormProfile = popUpProfileEdit.querySelector('.pop-up__form_data_profile');
 let popUpFullImgCard = document.querySelector('.pop-up_data_image-card');
-
-let overlayCloseBtn = document.querySelectorAll('.pop-up__btn_type_close');
+let overlayCloseBtns = document.querySelectorAll('.pop-up__btn_type_close');
 let gallery = document.querySelector('.gallery');
 
 const initialCards = [
@@ -42,11 +41,8 @@ const initialCards = [
 
 /* for test */
 
-// https://stackoverflow.com/questions/3331353/transitions-on-the-css-display-property
-// изначально поставить хейт = 0, опасити 0, потом опасити 1, хейт авто или по значению, это все в класс/модификтор актив? и транзишн опасити (не забыть про оверфлоу хидден)
-
 /* for test END */
-
+renderCards(); // создать галерею из карточек в объекте
 
 gallery.addEventListener('click', e => {
   let box = e.target.closest('.card__image');
@@ -56,41 +52,9 @@ gallery.addEventListener('click', e => {
   }
 });
 
-function exportImageFromCard(box) {
-  let imageItem = document.querySelector('.pop-up__image-card');
-  imageItem.src = box.src;
-  imageItem.alt = box.alt;
-  document.querySelector('.pop-up__subtitle').textContent = box.alt;
-}
-
-
-
-function cardRemove(e) {
-  if (e.target.classList.contains('card__btn_type_delete')) {
-    let targetBox = e.target.closest('.card');
-    targetBox.remove();
-  }
-}
 gallery.addEventListener('click', cardRemove);
-
-function switchLikeActive(e) {
-  let btnLikeTarget = e.target;
-  if (btnLikeTarget.closest('.card__btn')) {
-    btnLikeTarget.classList.toggle('card__btn_like_active');
-  }
-}
 gallery.addEventListener('click', switchLikeActive);
-
-function addNewCard() {
-  let placeNameInput = document.querySelector('.pop-up__input_type_placeName');
-  let placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
-  if (placeNameInput.value === '' || placeLinkInput.value === '') {
-    alert('Необходимо заполнить все поля');
-  } else {
-    initialCards.push({ name: placeNameInput.value, link: placeLinkInput.value });
-    createCard({ name: placeNameInput.value, link: placeLinkInput.value });
-  }
-}
+overlayAddBtn.addEventListener('click', () => popUpOpenOverlay(popUpCardAdd));
 
 popUpFormCards.addEventListener('submit', e => {
   e.preventDefault();
@@ -99,27 +63,35 @@ popUpFormCards.addEventListener('submit', e => {
   clearInput(e.currentTarget);
 });
 
-function clearInput(box) {
-  box.querySelectorAll('.pop-up__input').forEach(item => (item.value = ''));
-}
+profileEditBtn.addEventListener('click', () => {
+  popUpExportValueToInput(popUpProfileEdit); // переносим нынешние значения в инпут
+  popUpOpenOverlay(popUpProfileEdit);
+});
 
-overlayCloseBtn.forEach(item => {
+popUpFormProfile.addEventListener('submit', e => {
+  e.preventDefault();
+  popUpValueEdit(popUpProfileEdit); // перенести значения инпутов в нужные строки профиля
+  popUpCloseOverlay(popUpProfileEdit);
+});
+
+overlayCloseBtns.forEach(item => {
   item.addEventListener('click', () => {
     let box = item.closest('.pop-up');
     popUpCloseOverlay(box);
     if (box === popUpCardAdd) {
-      clearInput(box);
+      clearInput(box); // очистить инпуты при закрытии у поп-апа с добавлением карточки
     }
   });
 });
 
-function popUpCloseOverlay(popUp) {
-  popUp.classList.remove('pop-up_opened');
+function renderCards() {
+  for (item of initialCards.reverse()) {
+    createCard(item); // вызовать функцию создания карточки у каждого элемента объекта
+  }
 }
 
-overlayAddBtn.addEventListener('click', () => popUpOpenOverlay(popUpCardAdd));
-
 function createCard(item) {
+  // создать карточку
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   let cardImage = cardElement.querySelector('.card__image');
@@ -130,35 +102,63 @@ function createCard(item) {
   gallery.prepend(cardElement);
 }
 
-function renderCards() {
-  for (item of initialCards.reverse()) {
-    createCard(item);
-  }
-}
-
-renderCards();
-
-profileEditBtn.addEventListener('click', () => {
-  popUpExportValueToInput(popUpProfileEdit);
-  popUpOpenOverlay(popUpProfileEdit);
-});
-
-popUpFormProfile.addEventListener('submit', e => {
-  e.preventDefault();
-  popUpValueEdit(popUpProfileEdit);
-  popUpCloseOverlay(popUpProfileEdit);
-});
-
 function popUpOpenOverlay(popUp) {
   popUp.classList.add('pop-up_opened');
 }
 
+function popUpCloseOverlay(popUp) {
+  popUp.classList.remove('pop-up_opened');
+}
+
+function exportImageFromCard(box) {
+  // передать информацию в поп-ап полноэранного просмотра картинки
+  let imageItem = document.querySelector('.pop-up__image-card');
+  imageItem.src = box.src;
+  imageItem.alt = box.alt;
+  document.querySelector('.pop-up__subtitle').textContent = box.alt;
+}
+
+function addNewCard() {
+  // добавить новуб карточку по данным инпутов
+  let placeNameInput = document.querySelector('.pop-up__input_type_placeName');
+  let placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
+  if (placeNameInput.value === '' || placeLinkInput.value === '') {
+    alert('Необходимо заполнить все поля');
+  } else {
+    initialCards.push({ name: placeNameInput.value, link: placeLinkInput.value });
+    createCard({ name: placeNameInput.value, link: placeLinkInput.value });
+  }
+}
+
+function cardRemove(e) {
+  // удаление карточки
+  if (e.target.classList.contains('card__btn_type_delete')) {
+    let targetBox = e.target.closest('.card');
+    targetBox.remove();
+  }
+}
+
+function clearInput(box) {
+  // очистка инпутов
+  box.querySelectorAll('.pop-up__input').forEach(item => (item.value = ''));
+}
+
+function switchLikeActive(e) {
+  // переключение модификатора актив у кнопки лайка
+  let btnLikeTarget = e.target;
+  if (btnLikeTarget.closest('.card__btn')) {
+    btnLikeTarget.classList.toggle('card__btn_like_active');
+  }
+}
+
 function popUpExportValueToInput(popUp) {
+  // переносим значения в инпуты из граф профиля
   popUp.querySelector('.pop-up__input_type_name').value = profileName.textContent;
   popUp.querySelector('.pop-up__input_type_job').value = profileJob.textContent;
 }
 
 function popUpValueEdit(popUp) {
+  // переносим значения из инпутов в графы профиля
   let valueInputName = popUp.querySelector('.pop-up__input_type_name').value;
   let valueInputJob = popUp.querySelector('.pop-up__input_type_job').value;
   if (valueInputName == '' || valueInputJob == '') {

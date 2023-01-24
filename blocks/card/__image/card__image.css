@@ -4,6 +4,12 @@
   margin: 0;
   padding: 0;
   object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card__image:hover {
+  cursor: pointer;
+  transform: scale(103%);
 }
 
 @media screen and (max-width: 680px) {
@@ -17,3 +23,4 @@
     width: 100%;
   }
 }
+
