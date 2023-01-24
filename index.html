@@ -1,95 +1,71 @@
 <!DOCTYPE html>
 <html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <title>Местечко</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
-  <title>Местечко</title>
-</head>
+  <body class="page">
+    <header class="header">
+      <img class="header__logo" src="./images/logo.svg" alt="Логотип" />
+    </header>
 
-<body class="page">
-  <header class="header">
-    <img class="header__logo" src="./images/logo.svg" alt="Логотип">
-  </header>
-
-  <div class="pop-up">
-    <div class="pop-up__container">
-      <h2 class="pop-up__title">Редактировать профиль</h2>
-      <button type="button" class="pop-up__btn pop-up__btn_type_close"></button>
-      <form class="pop-up__form" name="pop-up-form-profile-edit">
-        <input class="pop-up__input pop-up__input_type_name" type="text" name="pop-up__input-name" id="pop-up__input-name"
-          placeholder="Имя профиля">
-        <input class="pop-up__input pop-up__input_type_job" type="text" name="pop-up__input-job" id="pop-up__input-job"
-          placeholder="Вид деятельности">
-        <button class="pop-up__btn pop-up__btn_type_submit" type="submit">Сохранить</button>
-      </form>
+    <div class="pop-up">
+      <div class="pop-up__container">
+        <h2 class="pop-up__title">Редактировать профиль</h2>
+        <button type="button" class="pop-up__btn pop-up__btn_type_close"></button>
+        <form class="pop-up__form" name="pop-up-form-profile-edit">
+          <input
+            class="pop-up__input pop-up__input_type_name"
+            type="text"
+            name="pop-up__input-name"
+            id="pop-up__input-name"
+            placeholder="Имя профиля"
+          />
+          <input
+            class="pop-up__input pop-up__input_type_job"
+            type="text"
+            name="pop-up__input-job"
+            id="pop-up__input-job"
+            placeholder="Вид деятельности"
+          />
+          <button class="pop-up__btn pop-up__btn_type_submit" type="submit">Сохранить</button>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <section class="profile">
-    <div class="profile__wrapper">
-      <img src="./images/prof-avatar.jpg" alt="Аватар профиля" class="profile__avatar">
-      <div class="profile__info">
-        <div class="profile__title">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__btn profile__btn_type_edit" type="button"></button>
+    <section class="profile">
+      <div class="profile__wrapper">
+        <img src="./images/prof-avatar.jpg" alt="Аватар профиля" class="profile__avatar" />
+        <div class="profile__info">
+          <div class="profile__title">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button class="profile__btn profile__btn_type_edit" type="button"></button>
+          </div>
+          <p class="profile__subtitle">Исследователь океана</p>
         </div>
-        <p class="profile__subtitle">Исследователь океана</p>
       </div>
-    </div>
-    <button class="profile__btn profile__btn_type_add" type="button"></button>
-  </section>
-  <section class="gallery">
-    <article class="card">
-      <img class="card__image" src="./images/berlin.jpg" alt="<Берлин>">
-      <div class="card__wrapper">
-        <h2 class="card__title">Берлин</h2>
-        <button class="card__btn" type="button"></button>
-      </div>
-    </article>
-    <article class="card">
-      <img class="card__image" src="./images/gorod-london-temza.jpg" alt="Лондом, река Темза">
-      <div class="card__wrapper">
-        <h2 class="card__title">Лондон, река Темза</h2>
-        <button class="card__btn" type="button"></button>
-      </div>
-    </article>
-    <article class="card">
-      <img class="card__image" src="./images/gamburg.jpg" alt="Гамбург">
-      <div class="card__wrapper">
-        <h2 class="card__title">Гамбург</h2>
-        <button class="card__btn" type="button"></button>
-      </div>
-    </article>
-    <article class="card">
-      <img class="card__image" src="./images/netherlands-niderlandy-hdr.jpg" alt="<Берлин>">
-      <div class="card__wrapper">
-        <h2 class="card__title">Нидерланды</h2>
-        <button class="card__btn" type="button"></button>
-      </div>
-    </article>
-    <article class="card">
-      <img class="card__image" src="./images/streets-of-amersfoort-gorod-doma.jpg" alt="Лондом, река Темза">
-      <div class="card__wrapper">
-        <h2 class="card__title">Де Ронде Венен</h2>
-        <button class="card__btn" type="button"></button>
-      </div>
-    </article>
-    <article class="card">
-      <img class="card__image" src="./images/amsterdam-netherlands.jpg" alt="Гамбург">
-      <div class="card__wrapper">
-        <h2 class="card__title">Амстердам, Нидерланды</h2>
-        <button class="card__btn" type="button"></button>
-      </div>
-    </article>
-  </section>
+      <button class="profile__btn profile__btn_type_add" type="button"></button>
+    </section>
 
-  <footer class="footer">
-    <p class="footer__text">&#169; 2023 Глазунов Антон</p>
-  </footer>
-  <script src="./scripts/index.js" defer></script>
-</body>
+    <section class="gallery">
+      <template id="card-template">
+        <article class="card">
+          <img class="card__image" src="#" alt="" />
+          <div class="card__wrapper">
+            <h2 class="card__title"></h2>
+            <button class="card__btn" type="button"></button>
+          </div>
+        </article>
+      </template>
+    </section>
 
+    <footer class="footer">
+      <p class="footer__text">&#169; 2023 Глазунов Антон</p>
+    </footer>
+    <script src="./scripts/index.js" defer></script>
+  </body>
 </html>
