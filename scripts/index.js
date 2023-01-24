@@ -41,6 +41,13 @@ const initialCards = [
 
 /* for test */
 
+function cardRemove(e) {
+  let btnLikeTarget = e.target
+  if (btnLikeTarget.closest('.card') ){
+    btnLikeTarget.remove()
+  }
+}
+gallery.addEventListener('dblclick', cardRemove)
 
 
 
