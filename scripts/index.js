@@ -41,25 +41,27 @@ const initialCards = [
 
 /* for test */
 
-function cardRemove(e) {
-  let btnLikeTarget = e.target
-  if (btnLikeTarget.closest('.card') ){
-    btnLikeTarget.remove()
-  }
-}
-gallery.addEventListener('dblclick', cardRemove)
+
 
 
 
 /* for test END */
 
-function switchLikeActive(e) {
-  let btnLikeTarget = e.target
-  if (btnLikeTarget.closest('.card__btn') ){
-    btnLikeTarget.classList.toggle('card__btn_active')
+function cardRemove(e) {
+  if (e.target.classList.contains('card__btn_type_delete')) {
+    let targetBox = e.target.closest('.card');
+    targetBox.remove();
   }
 }
-gallery.addEventListener('click', switchLikeActive)
+gallery.addEventListener('click', cardRemove);
+
+function switchLikeActive(e) {
+  let btnLikeTarget = e.target;
+  if (btnLikeTarget.closest('.card__btn')) {
+    btnLikeTarget.classList.toggle('card__btn_like_active');
+  }
+}
+gallery.addEventListener('click', switchLikeActive);
 
 function addNewCard() {
   let placeNameInput = document.querySelector('.pop-up__input_type_placeName');
@@ -83,13 +85,12 @@ function clearInput(box) {
   box.querySelectorAll('.pop-up__input').forEach(item => (item.value = ''));
 }
 
-
 overlayCloseBtn.forEach(item => {
   if (item.closest('.pop-up_data_cards')) {
-    item.addEventListener('click', (e) => {
+    item.addEventListener('click', e => {
       popUpCloseOverlay(popUpCardAdd);
       let box = item.closest('.pop-up_data_cards');
-      clearInput(box)
+      clearInput(box);
     });
   } else if (item.closest('.pop-up_data_profile')) {
     item.addEventListener('click', () => popUpCloseOverlay(popUpProfileEdit));
