@@ -7,11 +7,20 @@
 * Технологии
 * Организационная структура
 
+## **Функционал**
+
+- Редактировать имя профиля и статус :white_check_mark:
+- Добавлять свои кастомные карточки :white_check_mark:
+- Удалять любые имеющиеся карточки по кнопке :white_check_mark:
+- Поставить лайк любой карточке :white_check_mark:
+- Открыть картинку карточки отдельно почти во весь экран :white_check_mark:
+
+
 ## **Технологии**
 
 :white_check_mark: JS
 <br>
-:white_check_mark: Flexbox
+:white_check_mark: Flexbox / grid
 <br>
 :white_check_mark: @media
 <br>
