@@ -1,4 +1,4 @@
-import { createInitialCardsArr } from '../models/cards.js';
+import { createInitialCardsArr } from '../modules/cards.js';
 const initialCards = createInitialCardsArr();
 const profile = document.querySelector('.profile');
 const profileEditBtn = profile.querySelector('.profile__btn_type_edit');
