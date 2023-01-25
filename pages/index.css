@@ -4,12 +4,16 @@
 @import url(../blocks/header/header.css);
 @import url(../blocks/header/__logo/header__logo.css);
 @import url(../blocks/pop-up/pop-up.css);
+@import url(../blocks/pop-up/_data/pop-up_data_image-card.css);
 @import url(../blocks/pop-up/__btn/pop-up__btn.css);
 @import url(../blocks/pop-up/__btn/_type/pop-up__btn_type_close.css);
 @import url(../blocks/pop-up/__btn/_type/pop-up__btn_type_submit.css);
 @import url(../blocks/pop-up/__input/pop-up__input.css);
 @import url(../blocks/pop-up/__title/pop-up__title.css);
+@import url(../blocks/pop-up/__title/_text_start/pop-up__title_text_start.css);
 @import url(../blocks/pop-up/__form/pop-up__form.css);
+@import url(../blocks/pop-up/__subtitle/pop-up__subtitle.css);
+@import url(../blocks/pop-up/__image-card/pop-up__image-card.css);
 @import url(../blocks/profile/profile.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__btn/profile__btn.css);
@@ -20,13 +24,15 @@
 @import url(../blocks/profile/__subtitle/profile__subtitle.css);
 @import url(../blocks/profile/__title/profile__title.css);
 @import url(../blocks/profile/__wrapper/profile__wrapper.css);
-@import url(../blocks/pop-up/_opened/pop-up_opened.css);
+@import url(../blocks/pop-up/_opacity/pop-up_opacity.css);
+@import url(../blocks/pop-up/_visibility/pop_up_visibility_visible.css);
 @import url(../blocks/pop-up/__container/pop-up__container.css);
 @import url(../blocks/pop-up/__container/_data_image-card/pop-up__container_data_image-card.css);
 @import url(../blocks/gallery/gallery.css);
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__btn/card__btn.css);
 @import url(../blocks/card/__btn/_like_active/card__btn_like_active.css);
+@import url(../blocks/card/__btn/_type_delete/card__btn_type_delete.css);
 @import url(../blocks/card/__image/card__image.css);
 @import url(../blocks/card/__title/card__title.css);
 @import url(../blocks/card/__wrapper/card__wrapper.css);
@@ -34,36 +40,3 @@
 @import url(../blocks/footer/__text/footer__text.css);
 
 
-.card__btn_type_delete {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-image: url(../images/btn_type_delete.svg);
-  width: 18px;
-  height: 19px;
-}
-
-.card__btn_type_delete:hover {
-  opacity: 0.6;
-  cursor: pointer;
-}
-
-
-.pop-up__subtitle {
-  text-align: start;
-  margin: 10px 0 0 0;
-  color: white;
-  font-size: 12px;
-  line-height: 14.52px;
-  font-weight: 400;
-}
-
-.pop-up__image-card {
-  max-width: 75vw;
-  max-height: 75vh;
-}
-
-.pop-up__container_data_image-card {
-  width: unset;
-  background: transparent;
-}

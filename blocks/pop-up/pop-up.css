@@ -4,8 +4,6 @@
   position: fixed;
   background-color: rgba(000, 000, 000, 0.5);
   z-index: 2;
-  top: 0;
-  left: 0;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
@@ -14,7 +12,10 @@
  /* взамен дисплей none */
   inset: 0;
   display: flex;
-  height: 0;
+  visibility: hidden;
   opacity: 0;
-  transition: opacity 0.8s linear;
+  transition: visibility 0s, opacity 0.5s ease;
+  /*   height: 0; */
+/*   opacity: 0;
+  transition: opacity 0.8s linear; */
 }
