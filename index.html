@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./pages/index.css" />
-    <script src="./scripts/index.js" defer></script>
+    <script type="module" src='./models/cards.js'></script>
+    <script type="module" src="./scripts/index.js" defer></script>
     <title>Местечко</title>
   </head>
 
@@ -18,7 +19,7 @@
       <!-- Поп ап для профиля -->
       <div class="pop-up__container">
         <h2 class="pop-up__title">Редактировать профиль</h2>
-        <button type="button" class="pop-up__btn pop-up__btn_type_close"></button>
+        <button type="button" class="pop-up__btn pop-up__btn_type_close" aria-label="Закрыть"></button>
         <form class="pop-up__form pop-up__form_data_profile" name="pop-up-form-profile-edit">
           <input
             class="pop-up__input pop-up__input_type_name"
@@ -26,6 +27,7 @@
             name="pop-up__input-name"
             id="pop-up__input-name"
             placeholder="Имя профиля"
+            required
           />
           <input
             class="pop-up__input pop-up__input_type_job"
@@ -33,6 +35,7 @@
             name="pop-up__input-job"
             id="pop-up__input-job"
             placeholder="Вид деятельности"
+            required
           />
           <button class="pop-up__btn pop-up__btn_type_submit" type="submit">Сохранить</button>
         </form>
@@ -43,7 +46,7 @@
       <!-- Поп ап для добавления новой карточки -->
       <div class="pop-up__container">
         <h2 class="pop-up__title pop-up__title_text_start">Новое место</h2>
-        <button type="button" class="pop-up__btn pop-up__btn_type_close"></button>
+        <button type="button" class="pop-up__btn pop-up__btn_type_close" aria-label="Закрыть"></button>
         <form class="pop-up__form pop-up__form_data_cards" name="pop-up-form-profile-edit">
           <input
             class="pop-up__input pop-up__input_type_placeName"
@@ -51,6 +54,7 @@
             name="pop-up__input-placeName"
             id="pop-up__input-placeName"
             placeholder="Название"
+            required
           />
           <input
             class="pop-up__input pop-up__input_type_placeLink"
@@ -58,6 +62,7 @@
             name="pop-up__input-placeLink"
             id="pop-up__input-placeLink"
             placeholder="Ссылка на картинку"
+            required
           />
           <button class="pop-up__btn pop-up__btn_type_submit" type="submit">Создать</button>
         </form>
@@ -67,9 +72,9 @@
     <div class="pop-up pop-up_data_image-card">
       <!-- Поп ап полноэкранной карточки картинки -->
       <div class="pop-up__container pop-up__container_data_image-card">
-        <button type="button" class="pop-up__btn pop-up__btn_type_close"></button>
+        <button type="button" class="pop-up__btn pop-up__btn_type_close" aria-label="Закрыть"></button>
         <img class="pop-up__image-card" src="#" alt="#" />
-        <p class="pop-up__subtitle">Вписать сюда сабтитл</p>
+        <p class="pop-up__subtitle"></p>
       </div>
     </div>
 
@@ -79,12 +84,12 @@
         <div class="profile__info">
           <div class="profile__title">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button class="profile__btn profile__btn_type_edit" type="button"></button>
+            <button class="profile__btn profile__btn_type_edit" type="button" aria-label="Редактировать"></button>
           </div>
           <p class="profile__subtitle">Исследователь океана</p>
         </div>
       </div>
-      <button class="profile__btn profile__btn_type_add" type="button"></button>
+      <button class="profile__btn profile__btn_type_add" type="button" aria-label="Добавить"></button>
     </section>
 
     <section class="gallery">
@@ -93,9 +98,9 @@
           <img class="card__image" src="#" alt="" />
           <div class="card__wrapper">
             <h2 class="card__title"></h2>
-            <button class="card__btn card__btn_type_like" type="button"></button>
+            <button class="card__btn card__btn_type_like" type="button" aria-label="Лайкнуть"></button>
           </div>
-          <button class="card__btn card__btn_type_delete" type="button"></button>
+          <button class="card__btn card__btn_type_delete" type="button" aria-label="Удалить"></button>
         </article>
       </template>
     </section>

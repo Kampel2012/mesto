@@ -1,5 +1,5 @@
-'use strict';
-
+import { createInitialCardsArr } from '../models/cards.js';
+const initialCards = createInitialCardsArr();
 const profile = document.querySelector('.profile');
 const profileEditBtn = profile.querySelector('.profile__btn_type_edit');
 const profileName = profile.querySelector('.profile__name');
@@ -12,92 +12,60 @@ const popUpProfileEdit = document.querySelector('.pop-up_data_profile');
 const popUpFormProfile = popUpProfileEdit.querySelector('.pop-up__form_data_profile');
 const popUpFullImgCard = document.querySelector('.pop-up_data_image-card');
 const overlayCloseBtns = document.querySelectorAll('.pop-up__btn_type_close');
+const profileInputName = popUpProfileEdit.querySelector('.pop-up__input_type_name');
+const profileInputJob = popUpProfileEdit.querySelector('.pop-up__input_type_job');
+const placeNameInput = document.querySelector('.pop-up__input_type_placeName');
+const placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
 const gallery = document.querySelector('.gallery');
-let isAllDoneCardAdd = false;
-let isAllDoneProfileEdit = false;
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-  },
-];
-
-renderCards(); // создать галерею из карточек в объекте
+renderInitialCards(); // создать галерею из карточек в объекте
 
 gallery.addEventListener('click', e => {
-  checkIsBox(e)
-  const box = e.target.closest('card__image');
-  console.log(box)
-  if (checkIsBox) {
-    exportImageFromCard(box);
-    popUpOpenOverlay(popUpImageCard);
-  }
+  openPopUpIfRequired(e);
+  removeCardIfRequired(e);
+  switchLikeActiveIfRequired(e);
 });
 
-function checkIsBox(e) {
-  return e.target.classList.contains('card__image')
+function openPopUpIfRequired(e) {
+  if (e.target.classList.contains('card__image')) {
+    fillPopupImageFromCard(e);
+    openPopUpOverlay(popUpImageCard);
+  }
 }
 
-gallery.addEventListener('click', removeCard);
-gallery.addEventListener('click', switchLikeActive);
-overlayAddBtn.addEventListener('click', () => popUpOpenOverlay(popUpCardAdd));
+overlayAddBtn.addEventListener('click', e => {
+  openPopUpOverlay(popUpCardAdd);
+  popUpFormCards.reset();
+});
 
 popUpFormCards.addEventListener('submit', e => {
   e.preventDefault();
   addNewCard();
-  if (isAllDoneCardAdd) {
-    closePopUpOverlay(popUpCardAdd);
-  }
-  clearInput(e.currentTarget);
+  closePopUpOverlay(popUpCardAdd);
 });
 
 profileEditBtn.addEventListener('click', () => {
-  exportPopUpValueToInput(popUpProfileEdit); // переносим нынешние значения в инпут
-  popUpOpenOverlay(popUpProfileEdit);
+  exportPopUpEditProfileValuesToInputs(popUpProfileEdit); // переносим нынешние значения в инпут
+  openPopUpOverlay(popUpProfileEdit);
 });
 
 popUpFormProfile.addEventListener('submit', e => {
   e.preventDefault();
-  editPopUpValue(popUpProfileEdit); // перенести значения инпутов в нужные строки профиля
-  if (isAllDoneProfileEdit) {
-    closePopUpOverlay(popUpProfileEdit);
-  }
+  importPopUpEditProfileValuesFromInputs(popUpProfileEdit); // перенести значения инпутов в нужные строки профиля
+  closePopUpOverlay(popUpProfileEdit);
 });
 
 overlayCloseBtns.forEach(item => {
   item.addEventListener('click', () => {
     const box = item.closest('.pop-up');
     closePopUpOverlay(box);
-    if (box === popUpCardAdd) {
-      clearInput(box); // очистить инпуты при закрытии у поп-апа с добавлением карточки
-    }
   });
 });
 
-function renderCards() {
+function renderInitialCards() {
   for (const item of initialCards.reverse()) {
-    createCard(item); // вызовать функцию создания карточки у каждого элемента объекта
+    // вызовать функцию создания карточки у каждого элемента объекта
+    renderCard(createCard(item));
   }
 }
 
@@ -110,44 +78,36 @@ function createCard(item) {
   cardImage.alt = item.name;
   const cardTitle = cardElement.querySelector('.card__title');
   cardTitle.textContent = item.name;
+  return cardElement;
+}
+
+function renderCard(cardElement) {
   gallery.prepend(cardElement);
 }
 
-function popUpOpenOverlay(popUp) {
-  popUp.classList.add('pop-up_opacity');
-  popUp.classList.add('pop_up_visibility_visible');
+function openPopUpOverlay(popUp) {
+  popUp.classList.add('pop-up_opened');
 }
 
 function closePopUpOverlay(popUp) {
-  popUp.classList.remove('pop-up_opacity');
-  setTimeout(() => {
-    popUp.classList.remove('pop_up_visibility_visible');
-  }, 300);
+  popUp.classList.remove('pop-up_opened');
 }
 
-function exportImageFromCard(box) {
+function fillPopupImageFromCard(e) {
   // передать информацию в поп-ап полноэранного просмотра картинки
+  const box = e.target.closest('.card__image');
   const imageItem = document.querySelector('.pop-up__image-card');
-  imageItem.alt = box.alt;
   imageItem.src = box.src;
+  imageItem.alt = box.alt;
   document.querySelector('.pop-up__subtitle').textContent = box.alt;
 }
 
 function addNewCard() {
-  // добавить новуб карточку по данным инпутов
-  const placeNameInput = document.querySelector('.pop-up__input_type_placeName');
-  const placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
-  if (placeNameInput.value === '' || placeLinkInput.value === '') {
-    alert('Необходимо заполнить все поля');
-    isAllDoneCardAdd = false;
-  } else {
-    initialCards.push({ name: placeNameInput.value, link: placeLinkInput.value });
-    createCard({ name: placeNameInput.value, link: placeLinkInput.value });
-    isAllDoneCardAdd = true;
-  }
+  // добавить новую карточку по данным инпутов
+  renderCard(createCard({ name: placeNameInput.value, link: placeLinkInput.value }));
 }
 
-function removeCard(e) {
+function removeCardIfRequired(e) {
   // удаление карточки
   if (e.target.classList.contains('card__btn_type_delete')) {
     const targetBox = e.target.closest('.card');
@@ -155,35 +115,22 @@ function removeCard(e) {
   }
 }
 
-function clearInput(box) {
-  // очистка инпутов
-  box.querySelectorAll('.pop-up__input').forEach(item => (item.value = ''));
-}
-
-function switchLikeActive(e) {
+function switchLikeActiveIfRequired(e) {
   // переключение модификатора актив у кнопки лайка
   const btnLikeTarget = e.target;
-  if (btnLikeTarget.closest('.card__btn')) {
+  if (btnLikeTarget.classList.contains('card__btn')) {
     btnLikeTarget.classList.toggle('card__btn_like_active');
   }
 }
 
-function exportPopUpValueToInput(popUp) {
+function exportPopUpEditProfileValuesToInputs() {
   // переносим значения в инпуты из граф профиля
-  popUp.querySelector('.pop-up__input_type_name').value = profileName.textContent;
-  popUp.querySelector('.pop-up__input_type_job').value = profileJob.textContent;
+  profileInputName.value = profileName.textContent;
+  profileInputJob.value = profileJob.textContent;
 }
 
-function editPopUpValue(popUp) {
+function importPopUpEditProfileValuesFromInputs() {
   // переносим значения из инпутов в графы профиля
-  const valueInputName = popUp.querySelector('.pop-up__input_type_name').value;
-  const valueInputJob = popUp.querySelector('.pop-up__input_type_job').value;
-  if (valueInputName == '' || valueInputJob == '') {
-    alert('Заполните все поля ввода!');
-    isAllDoneProfileEdit = false;
-  } else {
-    profileName.textContent = valueInputName;
-    profileJob.textContent = valueInputJob;
-    isAllDoneProfileEdit = true;
-  }
+  profileName.textContent = profileInputName.value;
+  profileJob.textContent = profileInputJob.value;
 }
