@@ -46,12 +46,18 @@ const initialCards = [
 renderCards(); // создать галерею из карточек в объекте
 
 gallery.addEventListener('click', e => {
-  const box = e.target.closest('.card__image');
-  if (box) {
+  checkIsBox(e)
+  const box = e.target.closest('card__image');
+  console.log(box)
+  if (checkIsBox) {
     exportImageFromCard(box);
     popUpOpenOverlay(popUpImageCard);
   }
 });
+
+function checkIsBox(e) {
+  return e.target.classList.contains('card__image')
+}
 
 gallery.addEventListener('click', removeCard);
 gallery.addEventListener('click', switchLikeActive);
@@ -122,8 +128,8 @@ function closePopUpOverlay(popUp) {
 function exportImageFromCard(box) {
   // передать информацию в поп-ап полноэранного просмотра картинки
   const imageItem = document.querySelector('.pop-up__image-card');
-  imageItem.src = box.src;
   imageItem.alt = box.alt;
+  imageItem.src = box.src;
   document.querySelector('.pop-up__subtitle').textContent = box.alt;
 }
 

@@ -5,6 +5,10 @@
   padding: 0;
   object-fit: cover;
   transition: transform 0.5s ease;
+  display: block;
+  background-color: #000;
+  color: #fff;
+  font-size: 18px;
 }
 
 .card__image:hover {
