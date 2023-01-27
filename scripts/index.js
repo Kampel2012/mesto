@@ -10,7 +10,6 @@ const popUpCardAdd = document.querySelector('.pop-up_data_cards');
 const popUpFormCards = popUpCardAdd.querySelector('.pop-up__form_data_cards');
 const popUpProfileEdit = document.querySelector('.pop-up_data_profile');
 const popUpFormProfile = popUpProfileEdit.querySelector('.pop-up__form_data_profile');
-const popUpFullImgCard = document.querySelector('.pop-up_data_image-card');
 const overlayCloseBtns = document.querySelectorAll('.pop-up__btn_type_close');
 const profileInputName = popUpProfileEdit.querySelector('.pop-up__input_type_name');
 const profileInputJob = popUpProfileEdit.querySelector('.pop-up__input_type_job');
