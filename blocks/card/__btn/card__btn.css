@@ -8,6 +8,7 @@
   background-repeat: no-repeat;
   flex-shrink: 0;
   align-self: center;
+  transition: 0.3s;
 }
 
 .card__btn:hover {
