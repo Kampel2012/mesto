@@ -21,7 +21,7 @@ const gallery = document.querySelector('.gallery');
 // ? Закрытие по клику вне поп-апа
 const popUps = [popUpProfileEdit, popUpCardAdd, popUpImageCard];
 popUps.forEach(function (popUp) {
-  popUp.addEventListener('click', function (evt) {
+  popUp.addEventListener('mousedown', function (evt) {
     if (evt.target === evt.currentTarget) {
       closePopUpOverlay(popUp);
     }
@@ -29,14 +29,15 @@ popUps.forEach(function (popUp) {
 });
 
 // ? Закрытие по кнопке ESC
-document.addEventListener('keydown', function (evt) {
+function closePopUpWhenEscIsDown(evt) {
   if (evt.key === 'Escape') {
     const openedPopUp = document.querySelector('.pop-up_opened');
     if (openedPopUp) {
       closePopUpOverlay(openedPopUp);
     }
   }
-});
+}
+document.addEventListener('keydown', closePopUpWhenEscIsDown);
 
 // TODO old test zone
 // ? Деактивация кнопки, если не прошла валидация
