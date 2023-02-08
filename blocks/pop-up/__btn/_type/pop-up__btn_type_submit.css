@@ -5,11 +5,19 @@
   font-size: 18px;
   line-height: 18px;
   border-radius: 2px;
+  box-sizing: border-box;
 }
 
 .pop-up__btn_type_submit:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+
+.pop-up__btn_type_submit:disabled {
+  opacity: 0.2;
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #000;
 }
 
 @media screen and (max-width: 680px) {
@@ -22,7 +30,3 @@
     padding: 14px 0 15px 0;
   }
 }
-
-
-
-

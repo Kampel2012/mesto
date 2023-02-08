@@ -31,6 +31,8 @@
             id="pop-up__input-name"
             placeholder="Имя профиля"
             required
+            minlength="2"
+            maxlength="40"
           />
           <input
             class="pop-up__input pop-up__input_type_job"
@@ -39,8 +41,12 @@
             id="pop-up__input-job"
             placeholder="Вид деятельности"
             required
+            minlength="2"
+            maxlength="200"
           />
-          <button class="pop-up__btn pop-up__btn_type_submit" type="submit">Сохранить</button>
+          <button class="pop-up__btn pop-up__btn_type_submit" type="submit" disabled>
+            Сохранить
+          </button>
         </form>
       </div>
     </div>
@@ -62,6 +68,8 @@
             id="pop-up__input-placeName"
             placeholder="Название"
             required
+            minlength="2"
+            maxlength="30"
           />
           <input
             class="pop-up__input pop-up__input_type_placeLink"
@@ -71,7 +79,9 @@
             placeholder="Ссылка на картинку"
             required
           />
-          <button class="pop-up__btn pop-up__btn_type_submit" type="submit">Создать</button>
+          <button class="pop-up__btn pop-up__btn_type_submit" type="submit" disabled>
+            Создать
+          </button>
         </form>
       </div>
     </div>

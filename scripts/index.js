@@ -17,6 +17,46 @@ const placeNameInput = document.querySelector('.pop-up__input_type_placeName');
 const placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
 const gallery = document.querySelector('.gallery');
 
+// TODO TEST ZONE
+// ? Закрытие по клику вне поп-апа
+const popUps = [popUpProfileEdit, popUpCardAdd, popUpImageCard];
+popUps.forEach(function (popUp) {
+  popUp.addEventListener('click', function (evt) {
+    if (evt.target === evt.currentTarget) {
+      closePopUpOverlay(popUp);
+    }
+  });
+});
+
+// ? Закрытие по кнопке ESC
+document.addEventListener('keydown', function (evt) {
+  if (evt.key === 'Escape') {
+    const openedPopUp = document.querySelector('.pop-up_opened');
+    if (openedPopUp) {
+      closePopUpOverlay(openedPopUp);
+    }
+  }
+});
+
+// TODO old test zone
+// ? Деактивация кнопки, если не прошла валидация
+function enableValidation(popUp) {
+  const btnSubmit = popUp.querySelector('.pop-up__btn_type_submit');
+  let popUpInputs = Array.from(popUp.querySelectorAll('.pop-up__input'));
+  popUpInputs.forEach(item =>
+    item.addEventListener('input', function () {
+      let validity = popUpInputs.every(function (item) {
+        return item.validity.valid === true;
+      });
+      btnSubmit.disabled = !validity;
+    }),
+  );
+}
+enableValidation(popUpFormProfile);
+enableValidation(popUpCardAdd);
+
+// TODO end test zone
+
 renderInitialCards(); // создать галерею из карточек в объекте
 
 gallery.addEventListener('click', e => {
