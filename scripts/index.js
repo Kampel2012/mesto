@@ -17,7 +17,61 @@ const placeNameInput = document.querySelector('.pop-up__input_type_placeName');
 const placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
 const gallery = document.querySelector('.gallery');
 
+const objForValidate = {
+  formSelector: '.pop-up__form',
+  inputSelector: 'pop-up__input',
+  submitButtonSelector: 'pop-up__btn_type_submit',
+  inactiveButtonClass: 'pop-up__btn_inActive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible',
+};
+// ? Включение валидации путем перебора всех форм + выключение сабмита
+function enableValidation() {
+  const formList = Array.from(document.querySelectorAll('.pop-up__form'));
+  formList.forEach(function (form) {
+    form.addEventListener('submit', function (evt) {
+      evt.preventDefault();
+    }),
+      setEventListeners(form);
+  });
+}
+enableValidation();
+
+function setEventListeners(formElement) {
+  const inputList = Array.from(formElement.querySelectorAll('.pop-up__input'));
+  inputList.forEach(inputElement =>
+    inputElement.addEventListener('input', function () {
+      checkInputValidity(formElement, inputElement);
+    }),
+  );
+}
+
+function showInputError(formElement, inputElement, errorMessage) {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add('form__input_type_error');
+  inputElement.classList.add('form__input_type_error');
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add('form__input-error_active');
+}
+
+function hideInputError(formElement, inputElement) {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove('form__input_type_error');
+  errorElement.classList.remove('form__input-error_active');
+  errorElement.textContent = '';
+}
+
+function checkInputValidity(formElement, inputElement) {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+}
+
 // TODO TEST ZONE
+
+// TODO old test zone
 // ? Закрытие по клику вне поп-апа
 const popUps = [popUpProfileEdit, popUpCardAdd, popUpImageCard];
 popUps.forEach(function (popUp) {
@@ -39,9 +93,8 @@ function closePopUpWhenEscIsDown(evt) {
 }
 document.addEventListener('keydown', closePopUpWhenEscIsDown);
 
-// TODO old test zone
 // ? Деактивация кнопки, если не прошла валидация
-function enableValidation(popUp) {
+/* function enableValidation(popUp) {
   const btnSubmit = popUp.querySelector('.pop-up__btn_type_submit');
   let popUpInputs = Array.from(popUp.querySelectorAll('.pop-up__input'));
   popUpInputs.forEach(item =>
@@ -54,7 +107,7 @@ function enableValidation(popUp) {
   );
 }
 enableValidation(popUpFormProfile);
-enableValidation(popUpCardAdd);
+enableValidation(popUpCardAdd); */
 
 // TODO end test zone
 

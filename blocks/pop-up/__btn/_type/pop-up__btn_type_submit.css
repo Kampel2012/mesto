@@ -1,5 +1,5 @@
 .pop-up__btn_type_submit {
-  margin: 24px 0 36px 0;
+  margin: 15px 0 36px 0;
   width: calc(100% - 72px);
   padding: 16px 0 16px 0;
   font-size: 18px;
@@ -22,7 +22,7 @@
 
 @media screen and (max-width: 680px) {
   .pop-up__btn_type_submit {
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 25px;
     width: calc(100% - 44px);
     font-size: 14px;
