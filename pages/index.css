@@ -69,7 +69,7 @@
 }
 
 .form__input_type_error {
-  border: 1px solid red;
+  border-bottom: 1px solid red;
 }
 /* TODO Разобраться почему внизу надпись - добавил спан под инпут с этим классом */
 .pop-up__input-error {

@@ -25,6 +25,7 @@ const objForValidate = {
   inputErrorClass: 'form__input_type_error',
   errorClass: 'form__error_visible',
 };
+
 // ? Включение валидации путем перебора всех форм + выключение сабмита
 function enableValidation() {
   const formList = Array.from(document.querySelectorAll('.pop-up__form'));
@@ -45,8 +46,10 @@ function hasInvalidInput(inputList) {
 function toggleButtonState(inputList, buttonElement) {
   if (hasInvalidInput(inputList)) {
     buttonElement.classList.add('pop-up__btn_inActive');
+    buttonElement.disabled = true;
   } else {
     buttonElement.classList.remove('pop-up__btn_inActive');
+    buttonElement.disabled = false;
   }
 }
 
@@ -108,22 +111,6 @@ function closePopUpWhenEscIsDown(evt) {
   }
 }
 document.addEventListener('keydown', closePopUpWhenEscIsDown);
-
-// ? Деактивация кнопки, если не прошла валидация
-/* function enableValidation(popUp) {
-  const btnSubmit = popUp.querySelector('.pop-up__btn_type_submit');
-  let popUpInputs = Array.from(popUp.querySelectorAll('.pop-up__input'));
-  popUpInputs.forEach(item =>
-    item.addEventListener('input', function () {
-      let validity = popUpInputs.every(function (item) {
-        return item.validity.valid === true;
-      });
-      btnSubmit.disabled = !validity;
-    }),
-  );
-}
-enableValidation(popUpFormProfile);
-enableValidation(popUpCardAdd); */
 
 // TODO end test zone
 
@@ -196,6 +183,10 @@ function renderCard(cardElement) {
 
 function openPopUpOverlay(popUp) {
   popUp.classList.add('pop-up_opened');
+  popUp.querySelectorAll('.pop-up__input-error').forEach(item => (item.textContent = ''));
+  popUp
+    .querySelectorAll('.pop-up__input')
+    .forEach(item => item.classList.remove('form__input_type_error'));
 }
 
 function closePopUpOverlay(popUp) {
