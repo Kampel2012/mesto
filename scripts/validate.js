@@ -2,10 +2,10 @@ const objForValidate = {
   formSelector: '.pop-up__form',
   inputSelector: '.pop-up__input',
   submitButtonSelector: '.pop-up__btn_type_submit',
-  fiedSetSelector: '.form__set',
+  fiedSetSelector: '.pop-up__set',
   inactiveButtonClass: 'pop-up__btn_inActive',
-  inputErrorClass: 'form__input_type_error',
-  errorClass: 'form__error_visible',
+  inputErrorClass: 'pop-up__input_type_error',
+  errorClass: 'pop-up__input-error_visible',
 };
 
 const showInputError = (formElement, inputElement, errorMessage) => {
