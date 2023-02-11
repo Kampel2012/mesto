@@ -60,7 +60,7 @@ const toggleButtonState = (inputList, buttonElement) => {
   }
 };
 
-const enableValidation = validationConfig => {
+const enableValidation = () => {
   const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
   formList.forEach(function (formElement) {
     formElement.addEventListener('submit', function (evt) {
@@ -73,11 +73,13 @@ const enableValidation = validationConfig => {
   });
 };
 
-enableValidation(validationConfig);
+enableValidation();
 
 export function removeValidationErrors(popUp) {
   const listInputs = makeListInputs(popUp);
   listInputs.forEach(item => {
     hideInputError(popUp, item);
   });
+  const buttonElement = popUp.querySelector(validationConfig.submitButtonSelector);
+  buttonElement.disabled = true;
 }

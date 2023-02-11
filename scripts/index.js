@@ -23,6 +23,12 @@ const imageItem = document.querySelector('.pop-up__image-card');
 const popUpDescription = document.querySelector('.pop-up__subtitle');
 const cardTemplate = document.querySelector('#card-template').content;
 
+function openPopup(popUp) {
+  popUp.classList.add('pop-up_opened');
+  removeValidationErrors(popUp);
+  document.addEventListener('keydown', closePopUpWhenEscIsDown);
+}
+
 renderInitialCards();
 
 overlayAddBtn.addEventListener('click', e => {
@@ -114,12 +120,6 @@ function closePopUpWhenEscIsDown(evt) {
       closePopup(openedPopUp);
     }
   }
-}
-
-function openPopup(popUp) {
-  popUp.classList.add('pop-up_opened');
-  removeValidationErrors(popUp);
-  document.addEventListener('keydown', closePopUpWhenEscIsDown);
 }
 
 function renderInitialCards() {
