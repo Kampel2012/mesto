@@ -73,7 +73,6 @@ function setCardHandling(cardElement) {
 }
 
 function createCard(item) {
-  // создать карточку
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardImage = cardElement.querySelector('.card__image');
   cardImage.src = item.link;
