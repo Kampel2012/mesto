@@ -1,5 +1,6 @@
 import { createInitialCardsArr } from './cards.js';
 import { hideInputError } from './validate.js';
+
 const initialCards = createInitialCardsArr();
 const profile = document.querySelector('.profile');
 const profileEditBtn = profile.querySelector('.profile__btn_type_edit');
@@ -19,40 +20,9 @@ const placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
 const gallery = document.querySelector('.gallery');
 const popUps = Array.from(document.querySelectorAll('.pop-up'));
 
-// TODO TEST ZONE
+renderInitialCards();
 
-function openPopUpOverlay(popUp) {
-  popUp.classList.add('pop-up_opened');
-  const popUpInputs = Array.from(popUp.querySelectorAll('.pop-up__input'));
-  popUpInputs.forEach(item => {
-    hideInputError(popUp, item);
-  });
-}
-
-// TODO old test zone
-// ? Закрытие по клику вне поп-апа
-popUps.forEach(function (popUp) {
-  popUp.addEventListener('mousedown', function (evt) {
-    if (evt.target === evt.currentTarget) {
-      closePopUpOverlay(popUp);
-    }
-  });
-});
-
-// ? Закрытие по кнопке ESC
-function closePopUpWhenEscIsDown(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopUp = document.querySelector('.pop-up_opened');
-    if (openedPopUp) {
-      closePopUpOverlay(openedPopUp);
-    }
-  }
-}
 document.addEventListener('keydown', closePopUpWhenEscIsDown);
-
-// TODO end test zone
-
-renderInitialCards(); // создать галерею из карточек в объекте
 
 gallery.addEventListener('click', e => {
   openPopUpIfRequired(e);
@@ -78,6 +48,16 @@ popUpFormCards.addEventListener('submit', e => {
   closePopUpOverlay(popUpCardAdd);
 });
 
+// ? Закрытие по клику вне поп-апа
+popUps.forEach(function (popUp) {
+  popUp.addEventListener('mousedown', function (evt) {
+    // не клик, потому что выделяя текст из инпута мышка часто выходит за пределы и поп ап закрывается
+    if (evt.target === evt.currentTarget) {
+      closePopUpOverlay(popUp);
+    }
+  });
+});
+
 profileEditBtn.addEventListener('click', () => {
   exportPopUpEditProfileValuesToInputs(popUpProfileEdit); // переносим нынешние значения в инпут
   openPopUpOverlay(popUpProfileEdit);
@@ -95,6 +75,24 @@ overlayCloseBtns.forEach(item => {
     closePopUpOverlay(box);
   });
 });
+
+// ? Закрытие по кнопке ESC
+function closePopUpWhenEscIsDown(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopUp = document.querySelector('.pop-up_opened');
+    if (openedPopUp) {
+      closePopUpOverlay(openedPopUp);
+    }
+  }
+}
+
+function openPopUpOverlay(popUp) {
+  popUp.classList.add('pop-up_opened');
+  const popUpInputs = Array.from(popUp.querySelectorAll('.pop-up__input'));
+  popUpInputs.forEach(item => {
+    hideInputError(popUp, item);
+  });
+}
 
 function renderInitialCards() {
   for (const item of initialCards.reverse()) {
