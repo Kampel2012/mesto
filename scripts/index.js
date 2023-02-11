@@ -1,5 +1,5 @@
 import { createInitialCardsArr } from './cards.js';
-import { hideInputError } from './validate.js';
+import { removeValidationErrors } from './validate.js';
 
 const initialCards = createInitialCardsArr();
 const profile = document.querySelector('.profile');
@@ -19,33 +19,21 @@ const placeNameInput = document.querySelector('.pop-up__input_type_placeName');
 const placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
 const gallery = document.querySelector('.gallery');
 const popUps = Array.from(document.querySelectorAll('.pop-up'));
+const imageItem = document.querySelector('.pop-up__image-card');
+const popUpDescription = document.querySelector('.pop-up__subtitle');
+const cardTemplate = document.querySelector('#card-template').content;
 
 renderInitialCards();
 
-document.addEventListener('keydown', closePopUpWhenEscIsDown);
-
-gallery.addEventListener('click', e => {
-  openPopUpIfRequired(e);
-  removeCardIfRequired(e);
-  switchLikeActiveIfRequired(e);
-});
-
-function openPopUpIfRequired(e) {
-  if (e.target.classList.contains('card__image')) {
-    fillPopupImageFromCard(e);
-    openPopUpOverlay(popUpImageCard);
-  }
-}
-
 overlayAddBtn.addEventListener('click', e => {
-  openPopUpOverlay(popUpCardAdd);
+  openPopup(popUpCardAdd);
   popUpFormCards.reset();
 });
 
 popUpFormCards.addEventListener('submit', e => {
   e.preventDefault();
   addNewCard();
-  closePopUpOverlay(popUpCardAdd);
+  closePopup(popUpCardAdd);
 });
 
 // ? Закрытие по клику вне поп-апа
@@ -53,86 +41,54 @@ popUps.forEach(function (popUp) {
   popUp.addEventListener('mousedown', function (evt) {
     // не клик, потому что выделяя текст из инпута мышка часто выходит за пределы и поп ап закрывается
     if (evt.target === evt.currentTarget) {
-      closePopUpOverlay(popUp);
+      closePopup(popUp);
     }
   });
 });
 
 profileEditBtn.addEventListener('click', () => {
   exportPopUpEditProfileValuesToInputs(popUpProfileEdit); // переносим нынешние значения в инпут
-  openPopUpOverlay(popUpProfileEdit);
+  openPopup(popUpProfileEdit);
 });
 
 popUpFormProfile.addEventListener('submit', e => {
   e.preventDefault();
   importPopUpEditProfileValuesFromInputs(popUpProfileEdit); // перенести значения инпутов в нужные строки профиля
-  closePopUpOverlay(popUpProfileEdit);
+  closePopup(popUpProfileEdit);
 });
 
 overlayCloseBtns.forEach(item => {
   item.addEventListener('click', () => {
     const box = item.closest('.pop-up');
-    closePopUpOverlay(box);
+    closePopup(box);
   });
 });
 
-// ? Закрытие по кнопке ESC
-function closePopUpWhenEscIsDown(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopUp = document.querySelector('.pop-up_opened');
-    if (openedPopUp) {
-      closePopUpOverlay(openedPopUp);
-    }
-  }
-}
-
-function openPopUpOverlay(popUp) {
-  popUp.classList.add('pop-up_opened');
-  const popUpInputs = Array.from(popUp.querySelectorAll('.pop-up__input'));
-  popUpInputs.forEach(item => {
-    hideInputError(popUp, item);
+function setCardHandling(cardElement) {
+  cardElement.addEventListener('click', e => {
+    openPopUpIfRequired(e);
+    removeCardIfRequired(e);
+    switchLikeActiveIfRequired(e);
   });
-}
-
-function renderInitialCards() {
-  for (const item of initialCards.reverse()) {
-    // вызовать функцию создания карточки у каждого элемента объекта
-    renderCard(createCard(item));
-  }
 }
 
 function createCard(item) {
   // создать карточку
-  const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
   const cardImage = cardElement.querySelector('.card__image');
   cardImage.src = item.link;
   cardImage.alt = item.name;
   const cardTitle = cardElement.querySelector('.card__title');
   cardTitle.textContent = item.name;
+  setCardHandling(cardElement);
   return cardElement;
 }
 
-function renderCard(cardElement) {
-  gallery.prepend(cardElement);
-}
-
-function closePopUpOverlay(popUp) {
-  popUp.classList.remove('pop-up_opened');
-}
-
-function fillPopupImageFromCard(e) {
-  // передать информацию в поп-ап полноэранного просмотра картинки
-  const box = e.target.closest('.card__image');
-  const imageItem = document.querySelector('.pop-up__image-card');
-  imageItem.src = box.src;
-  imageItem.alt = box.alt;
-  document.querySelector('.pop-up__subtitle').textContent = box.alt;
-}
-
-function addNewCard() {
-  // добавить новую карточку по данным инпутов
-  renderCard(createCard({ name: placeNameInput.value, link: placeLinkInput.value }));
+function openPopUpIfRequired(e) {
+  if (e.target.classList.contains('card__image')) {
+    fillPopupImageFromCard(e);
+    openPopup(popUpImageCard);
+  }
 }
 
 function removeCardIfRequired(e) {
@@ -149,6 +105,51 @@ function switchLikeActiveIfRequired(e) {
   if (btnLikeTarget.classList.contains('card__btn')) {
     btnLikeTarget.classList.toggle('card__btn_like_active');
   }
+}
+
+// ? Закрытие по кнопке ESC
+function closePopUpWhenEscIsDown(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopUp = document.querySelector('.pop-up_opened');
+    if (openedPopUp) {
+      closePopup(openedPopUp);
+    }
+  }
+}
+
+function openPopup(popUp) {
+  popUp.classList.add('pop-up_opened');
+  removeValidationErrors(popUp);
+  document.addEventListener('keydown', closePopUpWhenEscIsDown);
+}
+
+function renderInitialCards() {
+  for (const item of initialCards.reverse()) {
+    // вызовать функцию создания карточки у каждого элемента объекта
+    renderCard(createCard(item));
+  }
+}
+
+function renderCard(cardElement) {
+  gallery.prepend(cardElement);
+}
+
+function closePopup(popUp) {
+  popUp.classList.remove('pop-up_opened');
+  document.removeEventListener('keydown', closePopUpWhenEscIsDown);
+}
+
+function fillPopupImageFromCard(e) {
+  // передать информацию в поп-ап полноэранного просмотра картинки
+  const box = e.target.closest('.card__image');
+  imageItem.src = box.src;
+  imageItem.alt = box.alt;
+  popUpDescription.textContent = box.alt;
+}
+
+function addNewCard() {
+  // добавить новую карточку по данным инпутов
+  renderCard(createCard({ name: placeNameInput.value, link: placeLinkInput.value }));
 }
 
 function exportPopUpEditProfileValuesToInputs() {
