@@ -1,4 +1,4 @@
-import { createInitialCardsArr } from '../modules/cards.js';
+import { createInitialCardsArr } from './cards.js';
 import { hideInputError } from './validate.js';
 const initialCards = createInitialCardsArr();
 const profile = document.querySelector('.profile');

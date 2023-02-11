@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   width: calc(100% - 72px);
-  margin: 0px 36px 25px 36px;
+  margin: 0px 36px 32px 36px; /* 32(25) для ошибок в 2 строчки */
 }
 
 @media screen and (max-width: 680px) {
