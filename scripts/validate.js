@@ -76,8 +76,8 @@ const enableValidation = validationConfig => {
 enableValidation(validationConfig);
 
 export function removeValidationErrors(popUp) {
-  const ListInputs = makeListInputs(popUp);
-  ListInputs.forEach(item => {
+  const listInputs = makeListInputs(popUp);
+  listInputs.forEach(item => {
     hideInputError(popUp, item);
   });
 }
