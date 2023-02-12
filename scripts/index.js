@@ -1,5 +1,5 @@
 import { createInitialCardsArr } from './cards.js';
-import { removeValidationErrors, disableSubmitBtn } from './validate.js';
+import { validationConfig, removeValidationErrors, disableSubmitBtn } from './validate.js';
 
 const initialCards = createInitialCardsArr();
 const profile = document.querySelector('.profile');
@@ -32,8 +32,8 @@ renderInitialCards();
 
 overlayAddBtn.addEventListener('click', e => {
   openPopup(popUpCardAdd);
-  disableSubmitBtn(popUpCardAdd);
-  removeValidationErrors(popUpCardAdd);
+  disableSubmitBtn(popUpCardAdd, validationConfig);
+  removeValidationErrors(popUpCardAdd, validationConfig);
   popUpFormCards.reset();
 });
 
@@ -55,8 +55,8 @@ popUps.forEach(function (popUp) {
 
 profileEditBtn.addEventListener('click', () => {
   exportPopUpEditProfileValuesToInputs(popUpProfileEdit); // переносим нынешние значения в инпут
-  disableSubmitBtn(popUpProfileEdit);
-  removeValidationErrors(popUpProfileEdit);
+  disableSubmitBtn(popUpProfileEdit, validationConfig);
+  removeValidationErrors(popUpProfileEdit, validationConfig);
   openPopup(popUpProfileEdit);
 });
 
