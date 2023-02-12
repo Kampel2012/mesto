@@ -75,11 +75,14 @@ const enableValidation = validationConfig => {
 
 enableValidation(validationConfig);
 
+export function disableSubmitBtn(popUp) {
+  const buttonElement = popUp.querySelector(validationConfig.submitButtonSelector);
+  buttonElement.disabled = true;
+}
+
 export function removeValidationErrors(popUp) {
   const listInputs = makeListInputs(popUp);
   listInputs.forEach(item => {
     hideInputError(popUp, item);
   });
-  const buttonElement = popUp.querySelector(validationConfig.submitButtonSelector);
-  buttonElement.disabled = true;
 }
