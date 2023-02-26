@@ -1,5 +1,5 @@
 import { createInitialCardsArr } from './cards.js';
-import { validationConfig, removeValidationErrors, disableSubmitBtn } from './validate.js';
+import { validationConfig, FormValidator } from './validate.js';
 
 const initialCards = createInitialCardsArr();
 const profile = document.querySelector('.profile');
@@ -23,6 +23,11 @@ const imageItem = document.querySelector('.pop-up__image-card');
 const popUpDescription = document.querySelector('.pop-up__subtitle');
 const cardTemplate = document.querySelector('#card-template').content;
 
+const validationFormPopupProfile = new FormValidator(validationConfig, popUpFormProfile);
+const validationFormPopupCards = new FormValidator(validationConfig, popUpFormCards);
+validationFormPopupProfile.enableValidation();
+validationFormPopupCards.enableValidation();
+
 function openPopup(popUp) {
   popUp.classList.add('pop-up_opened');
   document.addEventListener('keydown', closePopUpWhenEscIsDown);
@@ -32,8 +37,8 @@ renderInitialCards();
 
 overlayAddBtn.addEventListener('click', e => {
   openPopup(popUpCardAdd);
-  disableSubmitBtn(popUpCardAdd, validationConfig);
-  removeValidationErrors(popUpCardAdd, validationConfig);
+  validationFormPopupCards.disableSubmitBtn();
+  validationFormPopupCards.removeValidationErrors();
   popUpFormCards.reset();
 });
 
@@ -55,8 +60,8 @@ popUps.forEach(function (popUp) {
 
 profileEditBtn.addEventListener('click', () => {
   exportPopUpEditProfileValuesToInputs(popUpProfileEdit); // переносим нынешние значения в инпут
-  disableSubmitBtn(popUpProfileEdit, validationConfig);
-  removeValidationErrors(popUpProfileEdit, validationConfig);
+  validationFormPopupProfile.disableSubmitBtn();
+  validationFormPopupProfile.removeValidationErrors();
   openPopup(popUpProfileEdit);
 });
 
