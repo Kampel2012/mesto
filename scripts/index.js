@@ -1,6 +1,6 @@
 import { Card } from './card.js';
-import { createInitialCardsArr } from './cards.js';
-import { validationConfig, FormValidator } from './validate.js';
+import { createInitialCardsArr, validationConfig } from './constants.js';
+import { FormValidator } from './validate.js';
 
 const initialCards = createInitialCardsArr();
 const profile = document.querySelector('.profile');
@@ -22,7 +22,6 @@ const gallery = document.querySelector('.gallery');
 const popUps = Array.from(document.querySelectorAll('.pop-up'));
 const imageItem = document.querySelector('.pop-up__image-card');
 const popUpDescription = document.querySelector('.pop-up__subtitle');
-const cardTemplate = document.querySelector('#card-template').content;
 
 const validationFormPopupProfile = new FormValidator(validationConfig, popUpFormProfile);
 const validationFormPopupCards = new FormValidator(validationConfig, popUpFormCards);
@@ -32,9 +31,8 @@ validationFormPopupCards.enableValidation();
 renderInitialCards();
 
 gallery.addEventListener('click', e => {
-  const box = e.target.closest('.card__image');
-  if (box) {
-    fillPopupImageFromCard(box);
+  if (e.target.classList.contains('card__image')) {
+    fillPopupImageFromCard(e.target);
     openPopup(popUpImageCard);
   }
 });
@@ -79,7 +77,7 @@ function renderCard(cardElement) {
 function renderInitialCards() {
   for (const item of initialCards.reverse()) {
     // вызовать функцию создания карточки у каждого элемента объекта
-    renderCard(new Card(item, cardTemplate));
+    renderCard(new Card(item, '#card-template'));
   }
 }
 
@@ -91,8 +89,9 @@ function fillPopupImageFromCard(box) {
 }
 
 function addNewCard() {
-  // добавить новую карточку по данным инпутов
-  renderCard(new Card({ name: placeNameInput.value, link: placeLinkInput.value }, cardTemplate));
+  renderCard(
+    new Card({ name: placeNameInput.value, link: placeLinkInput.value }, '#card-template'),
+  );
 }
 
 function openPopup(popUp) {
@@ -119,9 +118,7 @@ popUps.forEach(function (popUp) {
 function closePopUpWhenEscIsDown(evt) {
   if (evt.key === 'Escape') {
     const openedPopUp = document.querySelector('.pop-up_opened');
-    if (openedPopUp) {
-      closePopup(openedPopUp);
-    }
+    closePopup(openedPopUp);
   }
 }
 

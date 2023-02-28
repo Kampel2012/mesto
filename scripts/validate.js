@@ -1,18 +1,8 @@
-export const validationConfig = {
-  formSelector: '.pop-up__form',
-  inputSelector: '.pop-up__input',
-  submitButtonSelector: '.pop-up__btn_type_submit',
-  fiedSetSelector: '.pop-up__set',
-  inactiveButtonClass: 'pop-up__btn_inActive',
-  inputErrorClass: 'pop-up__input_type_error',
-  errorClass: 'pop-up__input-error_visible',
-};
-
 export class FormValidator {
   constructor(config, elemForValid) {
     this._config = config;
     this._elemForValid = elemForValid;
-    this._inputList = this._makeListInputs(); // TODO это работает?
+    this._inputList = this._makeListInputs();
     this._buttonElement = this._elemForValid.querySelector(this._config.submitButtonSelector);
   }
 
@@ -48,8 +38,7 @@ export class FormValidator {
 
   _toggleButtonState() {
     if (this._hasInvalidInput()) {
-      this._buttonElement.classList.add(this._config.inactiveButtonClass);
-      this._buttonElement.disabled = true;
+      this.disableSubmitBtn();
     } else {
       this._buttonElement.classList.remove(this._config.inactiveButtonClass);
       this._buttonElement.disabled = false;
@@ -67,6 +56,7 @@ export class FormValidator {
   }
 
   disableSubmitBtn() {
+    this._buttonElement.classList.add(this._config.inactiveButtonClass);
     this._buttonElement.disabled = true;
   }
 
@@ -77,14 +67,9 @@ export class FormValidator {
   }
 
   enableValidation() {
-    this._elemForValid.addEventListener('submit', function (evt) {
+    /*     this._elemForValid.addEventListener('submit', function (evt) {
       evt.preventDefault();
-    });
-    const fieldsetList = Array.from(
-      this._elemForValid.querySelectorAll(this._config.fiedSetSelector),
-    );
-    fieldsetList.forEach(fieldset => {
-      this._setEventListeners(fieldset);
-    });
+    }); */ // ?
+    this._setEventListeners();
   }
 }

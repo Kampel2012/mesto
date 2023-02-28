@@ -1,3 +1,13 @@
+export const validationConfig = {
+  formSelector: '.pop-up__form',
+  inputSelector: '.pop-up__input',
+  submitButtonSelector: '.pop-up__btn_type_submit',
+  fiedSetSelector: '.pop-up__set',
+  inactiveButtonClass: 'pop-up__btn_inActive',
+  inputErrorClass: 'pop-up__input_type_error',
+  errorClass: 'pop-up__input-error_visible',
+};
+
 export function createInitialCardsArr() {
   return [
     {
@@ -24,5 +34,5 @@ export function createInitialCardsArr() {
       name: 'Байкал',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
     },
-  ]
+  ];
 }

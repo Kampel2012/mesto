@@ -1,7 +1,8 @@
 export class Card {
-  constructor(item, cardTemplate) {
-    //TODO item это обьект из name и link со значениями инпутов
-    this._cardElement = cardTemplate.querySelector('.card').cloneNode(true);
+  constructor(item, templateSelector) {
+    // item это обьект с полями name и link со значениями инпутов
+    this._templateSelector = templateSelector;
+    this._cardElement = this._createCardElement();
     this._cardImage = this._cardElement.querySelector('.card__image');
     this._cardImage.src = item.link;
     this._cardImage.alt = item.name;
@@ -9,6 +10,13 @@ export class Card {
     this._cardTitle.textContent = item.name;
     this._setCardHandling();
     return this._cardElement;
+  }
+
+  _createCardElement() {
+    return document
+      .querySelector(this._templateSelector)
+      .content.querySelector('.card')
+      .cloneNode(true);
   }
 
   _setCardHandling() {
@@ -19,15 +27,12 @@ export class Card {
   }
 
   _removeCardIfRequired(e) {
-    // удаление карточки
     if (e.target.classList.contains('card__btn_type_delete')) {
-      const targetBox = e.target.closest('.card');
-      targetBox.remove();
+      this._cardElement.remove();
     }
   }
 
   _switchLikeActiveIfRequired(e) {
-    // переключение модификатора актив у кнопки лайка
     const btnLikeTarget = e.target;
     if (btnLikeTarget.classList.contains('card__btn')) {
       btnLikeTarget.classList.toggle('card__btn_like_active');

@@ -20,6 +20,10 @@
   border: 1px solid #000;
 }
 
+.pop-up__btn_type_submit:disabled:hover {
+  cursor: default;
+}
+
 @media screen and (max-width: 680px) {
   .pop-up__btn_type_submit {
     margin-top: 18px;
