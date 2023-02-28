@@ -1,5 +1,5 @@
 import { Card } from './card.js';
-import { createInitialCardsArr, validationConfig } from './constants.js';
+import { createInitialCardsArr, createValidationConfig } from './constants.js';
 import { FormValidator } from './validate.js';
 
 const initialCards = createInitialCardsArr();
@@ -23,8 +23,8 @@ const popUps = Array.from(document.querySelectorAll('.pop-up'));
 const imageItem = document.querySelector('.pop-up__image-card');
 const popUpDescription = document.querySelector('.pop-up__subtitle');
 
-const validationFormPopupProfile = new FormValidator(validationConfig, popUpFormProfile);
-const validationFormPopupCards = new FormValidator(validationConfig, popUpFormCards);
+const validationFormPopupProfile = new FormValidator(createValidationConfig(), popUpFormProfile);
+const validationFormPopupCards = new FormValidator(createValidationConfig(), popUpFormCards);
 validationFormPopupProfile.enableValidation();
 validationFormPopupCards.enableValidation();
 
