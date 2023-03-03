@@ -67,9 +67,6 @@ export class FormValidator {
   }
 
   enableValidation() {
-    /*     this._elemForValid.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    }); */ // ?
     this._setEventListeners();
   }
 }
