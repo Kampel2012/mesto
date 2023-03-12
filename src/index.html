@@ -4,14 +4,18 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./pages/index.css" />
+    <!--     <link rel="stylesheet" href="./pages/index.css" /> -->
     <script type="module" src="./scripts/index.js"></script>
     <title>Местечко</title>
   </head>
 
   <body class="page">
     <header class="header">
-      <img class="header__logo" src="./images/logo.svg" alt="Логотип" />
+      <img
+        class="header__logo"
+        src="<%=require('./images/logo.svg')%>"
+        alt="Логотип"
+      />
     </header>
 
     <div class="pop-up pop-up_data_profile">
@@ -129,7 +133,7 @@
     <section class="profile">
       <div class="profile__wrapper">
         <img
-          src="./images/prof-avatar.jpg"
+          src="<%=require('./images/prof-avatar.jpg')%>"
           alt="Аватар профиля"
           class="profile__avatar"
         />

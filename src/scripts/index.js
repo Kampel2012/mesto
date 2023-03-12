@@ -1,3 +1,5 @@
+import '../pages/index.css';
+
 import { Card } from './card.js';
 import { createInitialCardsArr, createValidationConfig } from './constants.js';
 import { FormValidator } from './validate.js';
@@ -12,10 +14,16 @@ const popUpImageCard = document.querySelector('.pop-up_data_image-card');
 const popUpCardAdd = document.querySelector('.pop-up_data_cards');
 const popUpFormCards = popUpCardAdd.querySelector('.pop-up__form_data_cards');
 const popUpProfileEdit = document.querySelector('.pop-up_data_profile');
-const popUpFormProfile = popUpProfileEdit.querySelector('.pop-up__form_data_profile');
+const popUpFormProfile = popUpProfileEdit.querySelector(
+  '.pop-up__form_data_profile',
+);
 const overlayCloseBtns = document.querySelectorAll('.pop-up__btn_type_close');
-const profileInputName = popUpProfileEdit.querySelector('.pop-up__input_type_name');
-const profileInputJob = popUpProfileEdit.querySelector('.pop-up__input_type_job');
+const profileInputName = popUpProfileEdit.querySelector(
+  '.pop-up__input_type_name',
+);
+const profileInputJob = popUpProfileEdit.querySelector(
+  '.pop-up__input_type_job',
+);
 const placeNameInput = document.querySelector('.pop-up__input_type_placeName');
 const placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
 const gallery = document.querySelector('.gallery');
@@ -23,8 +31,14 @@ const popUps = Array.from(document.querySelectorAll('.pop-up'));
 const imageItem = document.querySelector('.pop-up__image-card');
 const popUpDescription = document.querySelector('.pop-up__subtitle');
 
-const validationFormPopupProfile = new FormValidator(createValidationConfig(), popUpFormProfile);
-const validationFormPopupCards = new FormValidator(createValidationConfig(), popUpFormCards);
+const validationFormPopupProfile = new FormValidator(
+  createValidationConfig(),
+  popUpFormProfile,
+);
+const validationFormPopupCards = new FormValidator(
+  createValidationConfig(),
+  popUpFormCards,
+);
 validationFormPopupProfile.enableValidation();
 validationFormPopupCards.enableValidation();
 
@@ -90,7 +104,10 @@ function fillPopupImageFromCard(box) {
 
 function addNewCard() {
   renderCard(
-    new Card({ name: placeNameInput.value, link: placeLinkInput.value }, '#card-template'),
+    new Card(
+      { name: placeNameInput.value, link: placeLinkInput.value },
+      '#card-template',
+    ),
   );
 }
 
