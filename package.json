@@ -7,7 +7,7 @@
     "build": "webpack --mode production",
     "dev": "webpack serve"
   },
-  "author": "",
+  "author": "Anton Glazunov",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.21.0",
