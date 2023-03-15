@@ -1,21 +1,20 @@
 import '../pages/index.css';
 
-import { Card } from './components/card.js';
+import { Card } from '../scripts/components/Card.js';
 import {
   createInitialCardsArr,
   createValidationConfig,
-} from './utils/constants.js';
-import { FormValidator } from './components/validate.js';
-import Section from './components/section.js';
-import PopupWithImage from './components/PopupWithImage';
-import PopupWithForm from './components/PopupWithForm';
-import UserInfo from './components/UserInfo';
+} from '../scripts/utils/constants.js';
+import { FormValidator } from '../scripts/components/FormValidator.js';
+import Section from '../scripts/components/Section.js';
+import PopupWithImage from '../scripts/components/PopupWithImage';
+import PopupWithForm from '../scripts/components/PopupWithForm';
+import UserInfo from '../scripts/components/UserInfo';
 
 import {
   profileEditBtn,
   overlayAddBtn,
   popUpFormCards,
-  popUpProfileEdit,
   popUpFormProfile,
   profileInputName,
   profileInputJob,
@@ -23,9 +22,14 @@ import {
   placeLinkInput,
   imageItem,
   popUpDescription,
-} from './utils/constants.js';
+} from '../scripts/utils/constants.js';
 
 const initialCards = createInitialCardsArr();
+
+const profileUserInfo = new UserInfo({
+  selectorName: '.profile__name',
+  selectorJob: '.profile__subtitle',
+});
 
 const popupFullCard = new PopupWithImage('.pop-up_data_image-card');
 const popupCards = new PopupWithForm('.pop-up_data_cards', addNewCardInGallery);
@@ -33,11 +37,6 @@ const popupProfile = new PopupWithForm(
   '.pop-up_data_profile',
   importPopUpEditProfileValuesFromInputs,
 );
-
-const profileUserInfo = new UserInfo({
-  selectorName: '.profile__name',
-  selectorJob: '.profile__subtitle',
-});
 
 function exportPopUpEditProfileValuesToInputs() {
   profileInputName.value = profileUserInfo.getUserInfo().name;
@@ -93,7 +92,7 @@ overlayAddBtn.addEventListener('click', () => {
 });
 
 profileEditBtn.addEventListener('click', () => {
-  exportPopUpEditProfileValuesToInputs(popUpProfileEdit); // переносим нынешние значения в инпут
+  exportPopUpEditProfileValuesToInputs(); // переносим нынешние значения в инпут
   validationFormPopupProfile.disableSubmitBtn();
   validationFormPopupProfile.removeValidationErrors();
   popupProfile.open();

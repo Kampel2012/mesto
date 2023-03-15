@@ -9,10 +9,7 @@ export default class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
-    const inputsValue = Array.from(
-      this._popupForm.querySelectorAll('input'),
-    ).map(item => item.value);
-    return { name: inputsValue[0], job: inputsValue[1] };
+    return Object.fromEntries(new FormData(this._popupForm));
   }
 
   setEventListeners() {

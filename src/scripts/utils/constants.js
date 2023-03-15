@@ -22,7 +22,6 @@ export {
   profileEditBtn,
   overlayAddBtn,
   popUpFormCards,
-  popUpProfileEdit,
   popUpFormProfile,
   profileInputName,
   profileInputJob,

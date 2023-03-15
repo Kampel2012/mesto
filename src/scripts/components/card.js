@@ -1,6 +1,5 @@
 export class Card {
   constructor({ name, link }, templateSelector, handleCardClick) {
-    // item это обьект с полями name и link со значениями инпутов
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._cardElement = this._createCardElement();
