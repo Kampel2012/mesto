@@ -1,14 +1,17 @@
 export class Card {
-  constructor(item, templateSelector) {
+  constructor({ name, link }, templateSelector) {
     // item это обьект с полями name и link со значениями инпутов
     this._templateSelector = templateSelector;
     this._cardElement = this._createCardElement();
     this._cardImage = this._cardElement.querySelector('.card__image');
-    this._cardImage.src = item.link;
-    this._cardImage.alt = item.name;
     this._cardTitle = this._cardElement.querySelector('.card__title');
-    this._cardTitle.textContent = item.name;
+    this._cardImage.src = link;
+    this._cardImage.alt = name;
+    this._cardTitle.textContent = name;
     this._setCardHandling();
+  }
+
+  getCardElement() {
     return this._cardElement;
   }
 

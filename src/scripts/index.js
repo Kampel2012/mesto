@@ -3,6 +3,7 @@ import '../pages/index.css';
 import { Card } from './card.js';
 import { createInitialCardsArr, createValidationConfig } from './constants.js';
 import { FormValidator } from './validate.js';
+import Section from './section.js';
 
 const initialCards = createInitialCardsArr();
 const profile = document.querySelector('.profile');
@@ -42,7 +43,28 @@ const validationFormPopupCards = new FormValidator(
 validationFormPopupProfile.enableValidation();
 validationFormPopupCards.enableValidation();
 
-renderInitialCards();
+// TODO TEST ZONA ////////////////////////////////////////////
+
+let gallerySection = new Section(
+  {
+    items: initialCards.reverse(),
+    renderer: item => new Card(item, '#card-template').getCardElement(),
+  },
+  '.gallery',
+);
+
+gallerySection.renderItems();
+
+function addNewCardInGallery() {
+  gallerySection.addItem(
+    new Card(
+      { name: placeNameInput.value, link: placeLinkInput.value },
+      '#card-template',
+    ).getCardElement(),
+  );
+}
+
+// TODO TEST ZONA END ////////////////////////////////////////////
 
 gallery.addEventListener('click', e => {
   if (e.target.classList.contains('card__image')) {
@@ -53,7 +75,7 @@ gallery.addEventListener('click', e => {
 
 popUpFormCards.addEventListener('submit', e => {
   e.preventDefault();
-  addNewCard();
+  addNewCardInGallery();
   closePopup(popUpCardAdd);
 });
 
@@ -84,31 +106,11 @@ overlayCloseBtns.forEach(item => {
   });
 });
 
-function renderCard(cardElement) {
-  gallery.prepend(cardElement);
-}
-
-function renderInitialCards() {
-  for (const item of initialCards.reverse()) {
-    // вызовать функцию создания карточки у каждого элемента объекта
-    renderCard(new Card(item, '#card-template'));
-  }
-}
-
 function fillPopupImageFromCard(box) {
   // передать информацию в поп-ап полноэранного просмотра картинки
   imageItem.src = box.src;
   imageItem.alt = box.alt;
   popUpDescription.textContent = box.alt;
-}
-
-function addNewCard() {
-  renderCard(
-    new Card(
-      { name: placeNameInput.value, link: placeLinkInput.value },
-      '#card-template',
-    ),
-  );
 }
 
 function openPopup(popUp) {
