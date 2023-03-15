@@ -1,9 +1,12 @@
 import '../pages/index.css';
 
-import { Card } from './card.js';
-import { createInitialCardsArr, createValidationConfig } from './constants.js';
-import { FormValidator } from './validate.js';
-import Section from './section.js';
+import { Card } from './components/card.js';
+import {
+  createInitialCardsArr,
+  createValidationConfig,
+} from './utils/constants.js';
+import { FormValidator } from './components/validate.js';
+import Section from './components/section.js';
 
 const initialCards = createInitialCardsArr();
 const profile = document.querySelector('.profile');
