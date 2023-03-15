@@ -1,7 +1,8 @@
 export class Card {
-  constructor({ name, link }, templateSelector) {
+  constructor({ name, link }, templateSelector, handleCardClick) {
     // item это обьект с полями name и link со значениями инпутов
     this._templateSelector = templateSelector;
+    this._handleCardClick = handleCardClick;
     this._cardElement = this._createCardElement();
     this._cardImage = this._cardElement.querySelector('.card__image');
     this._cardTitle = this._cardElement.querySelector('.card__title');
@@ -27,6 +28,7 @@ export class Card {
       this._removeCardIfRequired(e);
       this._switchLikeActiveIfRequired(e);
     });
+    this._cardImage.addEventListener('click', e => this._handleCardClick(e));
   }
 
   _removeCardIfRequired(e) {

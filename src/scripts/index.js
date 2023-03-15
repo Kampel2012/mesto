@@ -8,6 +8,8 @@ import {
 import { FormValidator } from './components/validate.js';
 import Section from './components/section.js';
 import Popup from './components/Popup';
+import PopupWithImage from './components/PopupWithImage';
+import PopupWithForm from './components/PopupWithForm';
 
 const initialCards = createInitialCardsArr();
 const profile = document.querySelector('.profile');
@@ -32,9 +34,24 @@ const placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
 const imageItem = document.querySelector('.pop-up__image-card');
 const popUpDescription = document.querySelector('.pop-up__subtitle');
 
-const popupProfile = new Popup('.pop-up_data_profile');
-const popupCards = new Popup('.pop-up_data_cards');
-const popupFullCard = new Popup('.pop-up_data_image-card');
+const popupFullCard = new PopupWithImage('.pop-up_data_image-card');
+const popupCards = new PopupWithForm('.pop-up_data_cards', addNewCardInGallery);
+const popupProfile = new PopupWithForm(
+  '.pop-up_data_profile',
+  importPopUpEditProfileValuesFromInputs,
+);
+
+function exportPopUpEditProfileValuesToInputs() {
+  // переносим значения в инпуты из граф профиля
+  profileInputName.value = profileName.textContent;
+  profileInputJob.value = profileJob.textContent;
+}
+
+function importPopUpEditProfileValuesFromInputs() {
+  // переносим значения из инпутов в графы профиля
+  profileName.textContent = profileInputName.value;
+  profileJob.textContent = profileInputJob.value;
+}
 
 const validationFormPopupProfile = new FormValidator(
   createValidationConfig(),
@@ -52,7 +69,8 @@ validationFormPopupCards.enableValidation();
 let gallerySection = new Section(
   {
     items: initialCards.reverse(),
-    renderer: item => new Card(item, '#card-template').getCardElement(),
+    renderer: item =>
+      new Card(item, '#card-template', handleCardClick).getCardElement(),
   },
   '.gallery',
 );
@@ -64,30 +82,21 @@ function addNewCardInGallery() {
     new Card(
       { name: placeNameInput.value, link: placeLinkInput.value },
       '#card-template',
+      handleCardClick,
     ).getCardElement(),
   );
 }
 
-gallerySection.container.addEventListener('click', e => {
-  if (e.target.classList.contains('card__image')) {
-    fillPopupImageFromCard(e.target);
-    popupFullCard.open();
-  }
-});
+function handleCardClick(e) {
+  popupFullCard.open(e.target, imageItem, popUpDescription);
+}
 
 // TODO TEST ZONA END ////////////////////////////////////////////
 
-popUpFormCards.addEventListener('submit', e => {
-  e.preventDefault();
-  addNewCardInGallery();
-  popupCards.close();
-});
-
-overlayAddBtn.addEventListener('click', e => {
+overlayAddBtn.addEventListener('click', () => {
   popupCards.open();
   validationFormPopupCards.disableSubmitBtn();
   validationFormPopupCards.removeValidationErrors();
-  popUpFormCards.reset();
 });
 
 profileEditBtn.addEventListener('click', () => {
@@ -96,28 +105,3 @@ profileEditBtn.addEventListener('click', () => {
   validationFormPopupProfile.removeValidationErrors();
   popupProfile.open();
 });
-
-popUpFormProfile.addEventListener('submit', e => {
-  e.preventDefault();
-  importPopUpEditProfileValuesFromInputs(popUpProfileEdit);
-  popupProfile.close();
-});
-
-function fillPopupImageFromCard(box) {
-  // передать информацию в поп-ап полноэранного просмотра картинки
-  imageItem.src = box.src;
-  imageItem.alt = box.alt;
-  popUpDescription.textContent = box.alt;
-}
-
-function exportPopUpEditProfileValuesToInputs() {
-  // переносим значения в инпуты из граф профиля
-  profileInputName.value = profileName.textContent;
-  profileInputJob.value = profileJob.textContent;
-}
-
-function importPopUpEditProfileValuesFromInputs() {
-  // переносим значения из инпутов в графы профиля
-  profileName.textContent = profileInputName.value;
-  profileJob.textContent = profileInputJob.value;
-}
