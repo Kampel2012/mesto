@@ -7,32 +7,25 @@ import {
 } from './utils/constants.js';
 import { FormValidator } from './components/validate.js';
 import Section from './components/section.js';
-import Popup from './components/Popup';
 import PopupWithImage from './components/PopupWithImage';
 import PopupWithForm from './components/PopupWithForm';
+import UserInfo from './components/UserInfo';
+
+import {
+  profileEditBtn,
+  overlayAddBtn,
+  popUpFormCards,
+  popUpProfileEdit,
+  popUpFormProfile,
+  profileInputName,
+  profileInputJob,
+  placeNameInput,
+  placeLinkInput,
+  imageItem,
+  popUpDescription,
+} from './utils/constants.js';
 
 const initialCards = createInitialCardsArr();
-const profile = document.querySelector('.profile');
-const profileEditBtn = profile.querySelector('.profile__btn_type_edit');
-const profileName = profile.querySelector('.profile__name');
-const profileJob = profile.querySelector('.profile__subtitle');
-const overlayAddBtn = profile.querySelector('.profile__btn_type_add');
-const popUpCardAdd = document.querySelector('.pop-up_data_cards');
-const popUpFormCards = popUpCardAdd.querySelector('.pop-up__form_data_cards');
-const popUpProfileEdit = document.querySelector('.pop-up_data_profile');
-const popUpFormProfile = popUpProfileEdit.querySelector(
-  '.pop-up__form_data_profile',
-);
-const profileInputName = popUpProfileEdit.querySelector(
-  '.pop-up__input_type_name',
-);
-const profileInputJob = popUpProfileEdit.querySelector(
-  '.pop-up__input_type_job',
-);
-const placeNameInput = document.querySelector('.pop-up__input_type_placeName');
-const placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
-const imageItem = document.querySelector('.pop-up__image-card');
-const popUpDescription = document.querySelector('.pop-up__subtitle');
 
 const popupFullCard = new PopupWithImage('.pop-up_data_image-card');
 const popupCards = new PopupWithForm('.pop-up_data_cards', addNewCardInGallery);
@@ -41,16 +34,20 @@ const popupProfile = new PopupWithForm(
   importPopUpEditProfileValuesFromInputs,
 );
 
+const profileUserInfo = new UserInfo({
+  selectorName: '.profile__name',
+  selectorJob: '.profile__subtitle',
+});
+
 function exportPopUpEditProfileValuesToInputs() {
+  profileInputName.value = profileUserInfo.getUserInfo().name;
+  profileInputJob.value = profileUserInfo.getUserInfo().job;
   // переносим значения в инпуты из граф профиля
-  profileInputName.value = profileName.textContent;
-  profileInputJob.value = profileJob.textContent;
 }
 
 function importPopUpEditProfileValuesFromInputs() {
+  profileUserInfo.setUserInfo(popupProfile.info);
   // переносим значения из инпутов в графы профиля
-  profileName.textContent = profileInputName.value;
-  profileJob.textContent = profileInputJob.value;
 }
 
 const validationFormPopupProfile = new FormValidator(
@@ -64,9 +61,7 @@ const validationFormPopupCards = new FormValidator(
 validationFormPopupProfile.enableValidation();
 validationFormPopupCards.enableValidation();
 
-// TODO TEST ZONA ////////////////////////////////////////////
-
-let gallerySection = new Section(
+const gallerySection = new Section(
   {
     items: initialCards.reverse(),
     renderer: item =>
@@ -90,8 +85,6 @@ function addNewCardInGallery() {
 function handleCardClick(e) {
   popupFullCard.open(e.target, imageItem, popUpDescription);
 }
-
-// TODO TEST ZONA END ////////////////////////////////////////////
 
 overlayAddBtn.addEventListener('click', () => {
   popupCards.open();
