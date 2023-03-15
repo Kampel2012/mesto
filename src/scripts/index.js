@@ -30,7 +30,6 @@ const profileInputJob = popUpProfileEdit.querySelector(
 );
 const placeNameInput = document.querySelector('.pop-up__input_type_placeName');
 const placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
-const gallery = document.querySelector('.gallery');
 const popUps = Array.from(document.querySelectorAll('.pop-up'));
 const imageItem = document.querySelector('.pop-up__image-card');
 const popUpDescription = document.querySelector('.pop-up__subtitle');
@@ -67,14 +66,14 @@ function addNewCardInGallery() {
   );
 }
 
-// TODO TEST ZONA END ////////////////////////////////////////////
-
-gallery.addEventListener('click', e => {
+gallerySection.container.addEventListener('click', e => {
   if (e.target.classList.contains('card__image')) {
     fillPopupImageFromCard(e.target);
     openPopup(popUpImageCard);
   }
 });
+
+// TODO TEST ZONA END ////////////////////////////////////////////
 
 popUpFormCards.addEventListener('submit', e => {
   e.preventDefault();
