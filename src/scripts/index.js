@@ -7,6 +7,7 @@ import {
 } from './utils/constants.js';
 import { FormValidator } from './components/validate.js';
 import Section from './components/section.js';
+import Popup from './components/Popup';
 
 const initialCards = createInitialCardsArr();
 const profile = document.querySelector('.profile');
@@ -14,14 +15,12 @@ const profileEditBtn = profile.querySelector('.profile__btn_type_edit');
 const profileName = profile.querySelector('.profile__name');
 const profileJob = profile.querySelector('.profile__subtitle');
 const overlayAddBtn = profile.querySelector('.profile__btn_type_add');
-const popUpImageCard = document.querySelector('.pop-up_data_image-card');
 const popUpCardAdd = document.querySelector('.pop-up_data_cards');
 const popUpFormCards = popUpCardAdd.querySelector('.pop-up__form_data_cards');
 const popUpProfileEdit = document.querySelector('.pop-up_data_profile');
 const popUpFormProfile = popUpProfileEdit.querySelector(
   '.pop-up__form_data_profile',
 );
-const overlayCloseBtns = document.querySelectorAll('.pop-up__btn_type_close');
 const profileInputName = popUpProfileEdit.querySelector(
   '.pop-up__input_type_name',
 );
@@ -30,9 +29,12 @@ const profileInputJob = popUpProfileEdit.querySelector(
 );
 const placeNameInput = document.querySelector('.pop-up__input_type_placeName');
 const placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
-const popUps = Array.from(document.querySelectorAll('.pop-up'));
 const imageItem = document.querySelector('.pop-up__image-card');
 const popUpDescription = document.querySelector('.pop-up__subtitle');
+
+const popupProfile = new Popup('.pop-up_data_profile');
+const popupCards = new Popup('.pop-up_data_cards');
+const popupFullCard = new Popup('.pop-up_data_image-card');
 
 const validationFormPopupProfile = new FormValidator(
   createValidationConfig(),
@@ -69,7 +71,7 @@ function addNewCardInGallery() {
 gallerySection.container.addEventListener('click', e => {
   if (e.target.classList.contains('card__image')) {
     fillPopupImageFromCard(e.target);
-    openPopup(popUpImageCard);
+    popupFullCard.open();
   }
 });
 
@@ -78,11 +80,11 @@ gallerySection.container.addEventListener('click', e => {
 popUpFormCards.addEventListener('submit', e => {
   e.preventDefault();
   addNewCardInGallery();
-  closePopup(popUpCardAdd);
+  popupCards.close();
 });
 
 overlayAddBtn.addEventListener('click', e => {
-  openPopup(popUpCardAdd);
+  popupCards.open();
   validationFormPopupCards.disableSubmitBtn();
   validationFormPopupCards.removeValidationErrors();
   popUpFormCards.reset();
@@ -92,20 +94,13 @@ profileEditBtn.addEventListener('click', () => {
   exportPopUpEditProfileValuesToInputs(popUpProfileEdit); // переносим нынешние значения в инпут
   validationFormPopupProfile.disableSubmitBtn();
   validationFormPopupProfile.removeValidationErrors();
-  openPopup(popUpProfileEdit);
+  popupProfile.open();
 });
 
 popUpFormProfile.addEventListener('submit', e => {
   e.preventDefault();
-  importPopUpEditProfileValuesFromInputs(popUpProfileEdit); // перенести значения инпутов в нужные строки профиля
-  closePopup(popUpProfileEdit);
-});
-
-overlayCloseBtns.forEach(item => {
-  item.addEventListener('click', () => {
-    const box = item.closest('.pop-up');
-    closePopup(box);
-  });
+  importPopUpEditProfileValuesFromInputs(popUpProfileEdit);
+  popupProfile.close();
 });
 
 function fillPopupImageFromCard(box) {
@@ -113,34 +108,6 @@ function fillPopupImageFromCard(box) {
   imageItem.src = box.src;
   imageItem.alt = box.alt;
   popUpDescription.textContent = box.alt;
-}
-
-function openPopup(popUp) {
-  popUp.classList.add('pop-up_opened');
-  document.addEventListener('keydown', closePopUpWhenEscIsDown);
-}
-
-function closePopup(popUp) {
-  popUp.classList.remove('pop-up_opened');
-  document.removeEventListener('keydown', closePopUpWhenEscIsDown);
-}
-
-// ? Закрытие по клику вне поп-апа
-popUps.forEach(function (popUp) {
-  popUp.addEventListener('mousedown', function (evt) {
-    // не клик, потому что выделяя текст из инпута мышка часто выходит за пределы и поп ап закрывается
-    if (evt.target === evt.currentTarget) {
-      closePopup(popUp);
-    }
-  });
-});
-
-// ? Закрытие по кнопке ESC
-function closePopUpWhenEscIsDown(evt) {
-  if (evt.key === 'Escape') {
-    const openedPopUp = document.querySelector('.pop-up_opened');
-    closePopup(openedPopUp);
-  }
 }
 
 function exportPopUpEditProfileValuesToInputs() {
