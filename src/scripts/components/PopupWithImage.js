@@ -3,17 +3,14 @@ import Popup from './Popup';
 export default class PopupWithImage extends Popup {
   constructor(selector) {
     super(selector);
+    this._imageItem = this._popup.querySelector('.pop-up__image-card');
+    this._popUpDescription = this._popup.querySelector('.pop-up__subtitle');
   }
 
-  open(box, imageItem, popUpDescription) {
-    this._fillPopupImageFromCard(box, imageItem, popUpDescription);
-    this.containter.classList.add('pop-up_opened');
-    document.addEventListener('keydown', this._handleEscClose);
-  }
-
-  _fillPopupImageFromCard(box, imageItem, popUpDescription) {
-    imageItem.src = box.src;
-    imageItem.alt = box.alt;
-    popUpDescription.textContent = box.alt;
+  open({ name, link }) {
+    this._imageItem.src = link;
+    this._imageItem.alt = name;
+    this._popUpDescription.textContent = name;
+    super.open();
   }
 }

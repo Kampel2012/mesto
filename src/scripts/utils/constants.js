@@ -13,10 +13,6 @@ const profileInputName = popUpProfileEdit.querySelector(
 const profileInputJob = popUpProfileEdit.querySelector(
   '.pop-up__input_type_job',
 );
-const placeNameInput = document.querySelector('.pop-up__input_type_placeName');
-const placeLinkInput = document.querySelector('.pop-up__input_type_placeLink');
-const imageItem = document.querySelector('.pop-up__image-card');
-const popUpDescription = document.querySelector('.pop-up__subtitle');
 
 export {
   profileEditBtn,
@@ -25,10 +21,6 @@ export {
   popUpFormProfile,
   profileInputName,
   profileInputJob,
-  placeNameInput,
-  placeLinkInput,
-  imageItem,
-  popUpDescription,
 };
 
 export function createValidationConfig() {

@@ -18,10 +18,6 @@ import {
   popUpFormProfile,
   profileInputName,
   profileInputJob,
-  placeNameInput,
-  placeLinkInput,
-  imageItem,
-  popUpDescription,
 } from '../scripts/utils/constants.js';
 
 const initialCards = createInitialCardsArr();
@@ -39,13 +35,14 @@ const popupProfile = new PopupWithForm(
 );
 
 function exportPopUpEditProfileValuesToInputs() {
-  profileInputName.value = profileUserInfo.getUserInfo().name;
-  profileInputJob.value = profileUserInfo.getUserInfo().job;
+  const data = profileUserInfo.getUserInfo();
+  profileInputName.value = data.name;
+  profileInputJob.value = data.job;
   // переносим значения в инпуты из граф профиля
 }
 
-function importPopUpEditProfileValuesFromInputs() {
-  profileUserInfo.setUserInfo(popupProfile.info);
+function importPopUpEditProfileValuesFromInputs(formInputs) {
+  profileUserInfo.setUserInfo(formInputs);
   // переносим значения из инпутов в графы профиля
 }
 
@@ -60,29 +57,26 @@ const validationFormPopupCards = new FormValidator(
 validationFormPopupProfile.enableValidation();
 validationFormPopupCards.enableValidation();
 
+function createCard(item) {
+  return new Card(item, '#card-template', handleCardClick).getCardElement();
+}
+
 const gallerySection = new Section(
   {
     items: initialCards.reverse(),
-    renderer: item =>
-      new Card(item, '#card-template', handleCardClick).getCardElement(),
+    renderer: item => createCard(item),
   },
   '.gallery',
 );
 
 gallerySection.renderItems();
 
-function addNewCardInGallery() {
-  gallerySection.addItem(
-    new Card(
-      { name: placeNameInput.value, link: placeLinkInput.value },
-      '#card-template',
-      handleCardClick,
-    ).getCardElement(),
-  );
+function addNewCardInGallery(formInputs) {
+  gallerySection.addItem(createCard(formInputs));
 }
 
-function handleCardClick(e) {
-  popupFullCard.open(e.target, imageItem, popUpDescription);
+function handleCardClick(data) {
+  popupFullCard.open(data);
 }
 
 overlayAddBtn.addEventListener('click', () => {

@@ -1,14 +1,20 @@
 export class Card {
   constructor({ name, link }, templateSelector, handleCardClick) {
+    this._name = name;
+    this._link = link;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
     this._cardElement = this._createCardElement();
     this._cardImage = this._cardElement.querySelector('.card__image');
     this._cardTitle = this._cardElement.querySelector('.card__title');
-    this._cardImage.src = link;
-    this._cardImage.alt = name;
-    this._cardTitle.textContent = name;
+    this._fillCardInfo();
     this._setCardHandling();
+  }
+
+  _fillCardInfo() {
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
+    this._cardTitle.textContent = this._name;
   }
 
   getCardElement() {
@@ -27,7 +33,9 @@ export class Card {
       this._removeCardIfRequired(e);
       this._switchLikeActiveIfRequired(e);
     });
-    this._cardImage.addEventListener('click', e => this._handleCardClick(e));
+    this._cardImage.addEventListener('click', () =>
+      this._handleCardClick({ name: this._name, link: this._link }),
+    );
   }
 
   _removeCardIfRequired(e) {
