@@ -41,6 +41,7 @@ export class Card {
   _removeCardIfRequired(e) {
     if (e.target.classList.contains('card__btn_type_delete')) {
       this._cardElement.remove();
+      this._cardElement = null;
     }
   }
 
