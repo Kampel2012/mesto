@@ -20,7 +20,12 @@ import {
   profileInputJob,
 } from '../scripts/utils/constants.js';
 
+// TODO TEST ZONE
+import { user } from '../scripts/components/Profile';
+// TODO TEST OVER
+
 const initialCards = createInitialCardsArr();
+console.log(initialCards);
 
 const profileUserInfo = new UserInfo({
   selectorName: '.profile__name',
