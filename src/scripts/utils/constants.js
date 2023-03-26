@@ -1,5 +1,3 @@
-import { api } from '../components/Api';
-
 const profile = document.querySelector('.profile');
 const profileEditBtn = profile.querySelector('.profile__btn_type_edit');
 const overlayAddBtn = profile.querySelector('.profile__btn_type_add');
@@ -35,15 +33,4 @@ export function createValidationConfig() {
     inputErrorClass: 'pop-up__input_type_error',
     errorClass: 'pop-up__input-error_visible',
   };
-}
-
-export function createInitialCardsArr() {
-  const result = [];
-  api.getInitialCards().then(items => {
-    items.forEach(elem => {
-      result.push(elem);
-    });
-  });
-  console.log(result);
-  return result;
 }

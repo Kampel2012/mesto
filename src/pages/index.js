@@ -1,10 +1,7 @@
 import '../pages/index.css';
 
 import { Card } from '../scripts/components/Card.js';
-import {
-  createInitialCardsArr,
-  createValidationConfig,
-} from '../scripts/utils/constants.js';
+import { createValidationConfig } from '../scripts/utils/constants.js';
 import { FormValidator } from '../scripts/components/FormValidator.js';
 import Section from '../scripts/components/Section.js';
 import PopupWithImage from '../scripts/components/PopupWithImage';
@@ -21,16 +18,35 @@ import {
 } from '../scripts/utils/constants.js';
 
 // TODO TEST ZONE
-import { user } from '../scripts/components/Profile';
-// TODO TEST OVER
-
-const initialCards = createInitialCardsArr();
-console.log(initialCards);
+/* import Profile from '../scripts/components/Profile';
+const user = new Profile(); */
 
 const profileUserInfo = new UserInfo({
   selectorName: '.profile__name',
   selectorJob: '.profile__subtitle',
+  selectorAvatar: '.profile__avatar',
 });
+
+export const gallerySection = new Section(
+  {
+    /* items: api.getInitialCards(), */
+    renderer: item => createCard(item),
+  },
+  '.gallery',
+);
+
+import { api } from '../scripts/components/Api';
+api.getUserInfoData().then(data => {
+  profileUserInfo.setUserInfo({
+    name: data.name,
+    job: data.about,
+    avatar: data.avatar,
+  });
+});
+api.getInitialCards().then(data => gallerySection.renderItems(data));
+
+/* gallerySection.renderItems(); */
+// TODO TEST OVER
 
 const popupFullCard = new PopupWithImage('.pop-up_data_image-card');
 const popupCards = new PopupWithForm('.pop-up_data_cards', addNewCardInGallery);
@@ -47,6 +63,7 @@ function exportPopUpEditProfileValuesToInputs() {
 }
 
 function importPopUpEditProfileValuesFromInputs(formInputs) {
+  api.editProfile(formInputs);
   profileUserInfo.setUserInfo(formInputs);
   // переносим значения из инпутов в графы профиля
 }
@@ -65,16 +82,6 @@ validationFormPopupCards.enableValidation();
 function createCard(item) {
   return new Card(item, '#card-template', handleCardClick).getCardElement();
 }
-
-const gallerySection = new Section(
-  {
-    items: initialCards.reverse(),
-    renderer: item => createCard(item),
-  },
-  '.gallery',
-);
-
-gallerySection.renderItems();
 
 function addNewCardInGallery(formInputs) {
   gallerySection.addItem(createCard(formInputs));
