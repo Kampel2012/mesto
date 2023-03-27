@@ -1,14 +1,18 @@
+import { profileUserInfo } from '../../pages';
+import { api } from './Api';
+
 export class Card {
   constructor(
-    { name, link, likes = [], _id = Date.now() },
+    { name, link, likes = [], _id },
     templateSelector,
     handleCardClick,
     handleConfirmDel,
   ) {
-    this.id = _id;
+    this._id = _id;
     this._handleConfirmDel = handleConfirmDel;
     this._name = name;
     this._link = link;
+    this.likesOriginal = likes; // TODO переименовать
     this._likes = [...likes].length;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
@@ -25,6 +29,9 @@ export class Card {
       this._cardElement.querySelector('.card__counter');
     this._fillCardInfo();
     this._setCardHandling();
+    if (this._checkIsLike(this.likesOriginal)) {
+      this._switchLikeActiveIfRequired();
+    }
   }
 
   _fillCardInfo() {
@@ -45,20 +52,58 @@ export class Card {
       .cloneNode(true);
   }
 
+  _checkIsLike(arr) {
+    return [...arr].some(
+      item =>
+        item.name === profileUserInfo.name.textContent &&
+        item.about === profileUserInfo.job.textContent,
+    );
+  }
+
+  _addCardtoServer() {
+    api
+      .switchStateLike(this._id, 'DELETE')
+      .then(
+        res => (
+          (this.likesOriginal = res.likes),
+          this._likes--,
+          (this._cardCounterContainer.textContent = this._likes)
+        ),
+      )
+      .then(() => this._switchLikeActiveIfRequired());
+  }
+
+  _deleteCardFromServer() {
+    api
+      .switchStateLike(this._id, 'PUT')
+      .then(
+        res => (
+          (this.likesOriginal = res.likes),
+          +this._likes++,
+          (this._cardCounterContainer.textContent = this._likes)
+        ),
+      )
+      .then(() => this._switchLikeActiveIfRequired());
+  }
+
   _setCardHandling() {
     this._cardButtonLike.addEventListener('click', () => {
-      this._switchLikeActiveIfRequired();
+      if (this._checkIsLike(this.likesOriginal)) {
+        this._addCardtoServer();
+      } else {
+        this._deleteCardFromServer();
+      }
     });
     if (this._cardButtonDelete)
       this._cardButtonDelete.addEventListener('click', () => {
-        this._handleConfirmDel(this.id); // открытие поп-апа с подтверждением
+        this._handleConfirmDel(this._id); // открытие поп-апа с подтверждением
         /*       this._removeCardIfRequired(); */
       });
     this._cardImage.addEventListener('click', () =>
       this._handleCardClick({
         name: this._name,
         link: this._link,
-        likes: this._likes, // ??? подумать еще стоит и протестить
+        likes: this._likes,
       }),
     );
   }

@@ -86,6 +86,22 @@ class Api {
       });
   }
 
+  switchStateLike(id, state) {
+    return fetch(`${this.baseUrl}/cards/${id}/likes`, {
+      method: state,
+      headers: this.headers,
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+      .catch(err => {
+        console.log(err); // "Что-то пошло не так: ..."
+      });
+  }
+
   // другие методы работы с API
 }
 

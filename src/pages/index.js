@@ -19,7 +19,7 @@ import {
 
 // TODO TEST ZONE
 
-const profileUserInfo = new UserInfo({
+export const profileUserInfo = new UserInfo({
   selectorName: '.profile__name',
   selectorJob: '.profile__subtitle',
   selectorAvatar: '.profile__avatar',
@@ -108,7 +108,7 @@ function createCard(item) {
 
 function addNewCardInGallery(formInputs) {
   api.addNewCard(formInputs).then(res => createCard(res));
-  gallerySection.addItem(createCard(formInputs));
+  /* gallerySection.addItem(createCard(formInputs)); */
 }
 
 function handleCardClick(data) {
