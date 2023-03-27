@@ -18,8 +18,6 @@ import {
 } from '../scripts/utils/constants.js';
 
 // TODO TEST ZONE
-/* import Profile from '../scripts/components/Profile';
-const user = new Profile(); */
 
 const profileUserInfo = new UserInfo({
   selectorName: '.profile__name',
@@ -29,7 +27,6 @@ const profileUserInfo = new UserInfo({
 
 export const gallerySection = new Section(
   {
-    /* items: api.getInitialCards(), */
     renderer: item => createCard(item),
   },
   '.gallery',
@@ -44,7 +41,7 @@ api.getUserInfoData().then(data => {
   });
 });
 api.getInitialCards().then(data => gallerySection.renderItems(data));
-
+/* api.addNewCard().then(res => createCard(res)); */
 /* gallerySection.renderItems(); */
 // TODO TEST OVER
 
@@ -84,6 +81,7 @@ function createCard(item) {
 }
 
 function addNewCardInGallery(formInputs) {
+  api.addNewCard(formInputs).then(res => createCard(res));
   gallerySection.addItem(createCard(formInputs));
 }
 

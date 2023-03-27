@@ -43,3 +43,9 @@
 @import url(../blocks/pop-up/__input/_type/pop-up__input_type_error.css);
 @import url(../blocks/pop-up/__input-error/pop-up__input-error.css);
 @import url(../blocks/pop-up/__input-error/_visible/pop-up__input-error_visible.css);
+
+.card__counter {
+  font-size: 13px;
+  margin: 3px 0 0 0;
+  text-align: center;
+}

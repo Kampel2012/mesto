@@ -53,12 +53,12 @@ class Api {
   }
 
   addNewCard({ name, link }) {
-    return fetch(`${this.baseUrl}/users/me`, {
-      method: 'PATCH',
+    return fetch(`${this.baseUrl}/cards`, {
+      method: 'POST',
       headers: this.headers,
       body: JSON.stringify({
-        name: 'Джоли',
-        link: 'https://images.squarespace-cdn.com/content/v1/50e8a6a2e4b0955e45ff0e82/1550117721846-7FX46IKK71RHWJQXOF7X/AngelinaJolie_8bit_240.jpg',
+        name: name,
+        link: link,
       }),
     })
       .then(res => {
