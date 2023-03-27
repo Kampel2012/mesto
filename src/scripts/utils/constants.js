@@ -13,6 +13,7 @@ const profileInputName = popUpProfileEdit.querySelector(
 const profileInputJob = popUpProfileEdit.querySelector(
   '.pop-up__input_type_job',
 );
+/* const popUpConfirm = document.querySelector('.pop-up_confirm'); */
 
 export {
   profileEditBtn,

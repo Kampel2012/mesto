@@ -33,11 +33,13 @@ export const gallerySection = new Section(
 );
 
 import { api } from '../scripts/components/Api';
+import PopupWithSubmit from '../scripts/components/PopupWithSubmit';
 api.getUserInfoData().then(data => {
   profileUserInfo.setUserInfo({
     name: data.name,
     job: data.about,
     avatar: data.avatar,
+    _id: data._id,
   });
 });
 api.getInitialCards().then(data => gallerySection.renderItems(data));
@@ -51,6 +53,21 @@ const popupProfile = new PopupWithForm(
   '.pop-up_data_profile',
   importPopUpEditProfileValuesFromInputs,
 );
+const popupConfirm = new PopupWithSubmit(
+  '.pop-up_confirm',
+  handleSubmitConfirm,
+);
+
+let currentCardId = 0;
+
+function handleConfirmDel(id) {
+  popupConfirm.open();
+  currentCardId = id;
+}
+
+function handleSubmitConfirm(params) {
+  api.deleteCard(currentCardId);
+}
 
 function exportPopUpEditProfileValuesToInputs() {
   const data = profileUserInfo.getUserInfo();
@@ -77,7 +94,16 @@ validationFormPopupProfile.enableValidation();
 validationFormPopupCards.enableValidation();
 
 function createCard(item) {
-  return new Card(item, '#card-template', handleCardClick).getCardElement();
+  let card = new Card(
+    item,
+    '#card-template',
+    handleCardClick,
+    handleConfirmDel,
+  ).getCardElement();
+  if (item.owner._id !== profileUserInfo._id) {
+    card.querySelector('.card__btn_type_delete').remove();
+  }
+  return card;
 }
 
 function addNewCardInGallery(formInputs) {

@@ -1,5 +1,12 @@
 export class Card {
-  constructor({ name, link, likes }, templateSelector, handleCardClick) {
+  constructor(
+    { name, link, likes = [], _id = Date.now() },
+    templateSelector,
+    handleCardClick,
+    handleConfirmDel,
+  ) {
+    this.id = _id;
+    this._handleConfirmDel = handleConfirmDel;
     this._name = name;
     this._link = link;
     this._likes = [...likes].length;
@@ -42,9 +49,11 @@ export class Card {
     this._cardButtonLike.addEventListener('click', () => {
       this._switchLikeActiveIfRequired();
     });
-    this._cardButtonDelete.addEventListener('click', () => {
-      this._removeCardIfRequired();
-    });
+    if (this._cardButtonDelete)
+      this._cardButtonDelete.addEventListener('click', () => {
+        this._handleConfirmDel(this.id); // открытие поп-апа с подтверждением
+        /*       this._removeCardIfRequired(); */
+      });
     this._cardImage.addEventListener('click', () =>
       this._handleCardClick({
         name: this._name,

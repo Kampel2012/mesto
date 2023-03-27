@@ -1,5 +1,3 @@
-import { gallerySection } from '../../pages';
-
 class Api {
   constructor({ baseUrl, headers }) {
     this.baseUrl = baseUrl;
@@ -60,6 +58,22 @@ class Api {
         name: name,
         link: link,
       }),
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+      .catch(err => {
+        console.log(err); // "Что-то пошло не так: ..."
+      });
+  }
+
+  deleteCard(id) {
+    return fetch(`${this.baseUrl}/cards/${id}`, {
+      method: 'DELETE',
+      headers: this.headers,
     })
       .then(res => {
         if (res.ok) {
