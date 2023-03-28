@@ -1,6 +1,3 @@
-import { profileUserInfo } from '../../pages';
-import { api } from './Api';
-
 export class Card {
   constructor(
     { name, link, likes = [], _id, owner },
