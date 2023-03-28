@@ -81,7 +81,7 @@ function handleConfirmDel(id, card) {
 }
 
 function handleSubmitConfirm(params) {
-  api
+  return api
     .deleteCard(currentCardId)
     .then(() => cardToDelete.remove())
     .then(() => (cardToDelete = null))
@@ -96,7 +96,9 @@ function exportPopUpEditProfileValuesToInputs() {
 }
 
 function importPopUpEditProfileValuesFromInputs(formInputs) {
-  api.editProfile(formInputs).then(profileUserInfo.setUserInfo(formInputs));
+  return api
+    .editProfile(formInputs)
+    .then(profileUserInfo.setUserInfo(formInputs));
   // переносим значения из инпутов в графы профиля
 }
 
@@ -131,7 +133,7 @@ function createCard(item) {
 }
 
 function addNewCardInGallery(formInputs) {
-  api
+  return api
     .addNewCard(formInputs)
     .then(res => createCard(res))
     .then(card => gallerySection.addItem(card))

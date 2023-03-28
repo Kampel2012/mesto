@@ -4,6 +4,7 @@ export default class PopupWithSubmit extends Popup {
   constructor(selector, funcSubmit) {
     super(selector);
     this._funcSubmit = funcSubmit;
+    /*     this._btnSubmit = this._popup.querySelector('.pop-up__btn_type_submit'); */
   }
 
   setEventListeners() {
@@ -15,4 +16,14 @@ export default class PopupWithSubmit extends Popup {
       this.close();
     });
   }
+
+  /*   _toggleBtnContent() {
+    let content = this._btnSubmit.innerText;
+    if (content === 'Да') {
+      this._btnSubmit.innerText = 'Удаление...';
+    }
+    if (content === 'Удаление...') {
+      this._btnSubmit.innerText = 'Да';
+    }
+  } */
 }
