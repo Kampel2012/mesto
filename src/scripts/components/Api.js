@@ -26,7 +26,7 @@ class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
       })
       .catch(err => {
-        console.log(err); // "Что-то пошло не так: ..."
+        console.log(err);
       });
   }
 
@@ -46,7 +46,7 @@ class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
       })
       .catch(err => {
-        console.log(err); // "Что-то пошло не так: ..."
+        console.log(err);
       });
   }
 
@@ -66,7 +66,7 @@ class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
       })
       .catch(err => {
-        console.log(err); // "Что-то пошло не так: ..."
+        console.log(err);
       });
   }
 
@@ -82,7 +82,7 @@ class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
       })
       .catch(err => {
-        console.log(err); // "Что-то пошло не так: ..."
+        console.log(err);
       });
   }
 
@@ -98,7 +98,7 @@ class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
       })
       .catch(err => {
-        console.log(err); // "Что-то пошло не так: ..."
+        console.log(err);
       });
   }
 
@@ -117,7 +117,7 @@ class Api {
         return Promise.reject(`Ошибка: ${res.status}`);
       })
       .catch(err => {
-        console.log(err); // "Что-то пошло не так: ..."
+        console.log(err);
       });
   }
 

@@ -70,7 +70,10 @@ export class Card {
           (this._cardCounterContainer.textContent = this._likes)
         ),
       )
-      .then(() => this._switchLikeActiveIfRequired());
+      .then(() => this._switchLikeActiveIfRequired())
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   _addLikeFromCard() {
@@ -83,7 +86,10 @@ export class Card {
           (this._cardCounterContainer.textContent = this._likes)
         ),
       )
-      .then(() => this._switchLikeActiveIfRequired());
+      .then(() => this._switchLikeActiveIfRequired())
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   _setCardHandling() {
@@ -97,7 +103,6 @@ export class Card {
     if (this._cardButtonDelete)
       this._cardButtonDelete.addEventListener('click', () => {
         this._handleConfirmDel(this._id, this.getCardElement()); // открытие поп-апа с подтверждением
-        /*       this._removeCardIfRequired(); */
       });
     this._cardImage.addEventListener('click', () =>
       this._handleCardClick({

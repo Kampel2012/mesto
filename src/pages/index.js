@@ -19,8 +19,6 @@ import {
   openPopupAvatarBtn,
 } from '../scripts/utils/constants.js';
 
-// TODO TEST ZONE
-
 export const profileUserInfo = new UserInfo({
   selectorName: '.profile__name',
   selectorJob: '.profile__subtitle',
@@ -48,9 +46,6 @@ api
   })
   .then(api.getInitialCards().then(data => gallerySection.renderItems(data)))
   .catch(err => console.log(err));
-/* api.addNewCard().then(res => createCard(res)); */
-/* gallerySection.renderItems(); */
-// TODO TEST OVER
 
 const popupFullCard = new PopupWithImage('.pop-up_data_image-card');
 const popupAvatar = new PopupWithForm(
@@ -80,7 +75,7 @@ function handleConfirmDel(id, card) {
   cardToDelete = card;
 }
 
-function handleSubmitConfirm(params) {
+function handleSubmitConfirm() {
   return api
     .deleteCard(currentCardId)
     .then(() => cardToDelete.remove())
@@ -138,7 +133,6 @@ function addNewCardInGallery(formInputs) {
     .then(res => createCard(res))
     .then(card => gallerySection.addItem(card))
     .catch(err => console.log(err));
-  /* gallerySection.addItem(createCard(formInputs)); */
 }
 
 function handleCardClick(data) {

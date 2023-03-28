@@ -19,6 +19,7 @@
 @import url(../blocks/profile/__btn/profile__btn.css);
 @import url(../blocks/profile/__btn/_type/profile__btn_type_add.css);
 @import url(../blocks/profile/__btn/_type/profile__btn_type_edit.css);
+@import url(../blocks/profile/__btn/_type/profile__btn_type_avatar.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__name/profile__name.css);
 @import url(../blocks/profile/__subtitle/profile__subtitle.css);
@@ -29,6 +30,7 @@
 @import url(../blocks/pop-up/__container/_data_image-card/pop-up__container_data_image-card.css);
 @import url(../blocks/gallery/gallery.css);
 @import url(../blocks/card/card.css);
+@import url(../blocks/card/__counter/card__counter.css);
 @import url(../blocks/card/__btn/card__btn.css);
 @import url(../blocks/card/__btn/_like_active/card__btn_like_active.css);
 @import url(../blocks/card/__btn/_type_delete/card__btn_type_delete.css);
@@ -43,46 +45,3 @@
 @import url(../blocks/pop-up/__input/_type/pop-up__input_type_error.css);
 @import url(../blocks/pop-up/__input-error/pop-up__input-error.css);
 @import url(../blocks/pop-up/__input-error/_visible/pop-up__input-error_visible.css);
-
-.card__counter {
-  font-size: 13px;
-  margin: 3px 0 0 0;
-  text-align: center;
-}
-
-.profile__btn_type_setAvatar {
-  border: 0;
-  width: 120px;
-  height: 120px;
-  box-sizing: border-box;
-  overflow: hidden;
-  margin-right: 30px;
-  padding: 0;
-  position: relative;
-}
-
-.profile__btn_type_setAvatar::before {
-  content: '';
-  position: absolute;
-  z-index: 2;
-  inset: 0;
-  height: 100%;
-  width: 100%;
-  visibility: hidden;
-  background-color: rgba(0, 0, 0, 0.8);
-  background-image: url(../images/Edit-Button.svg);
-  background-size: 26px;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.profile__btn_type_setAvatar:hover::before {
-  visibility: visible;
-  cursor: pointer;
-}
-
-@media screen and (max-width: 680px) {
-  .profile__btn_type_setAvatar {
-    margin: 0 auto;
-  }
-}

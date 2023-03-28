@@ -15,7 +15,10 @@ export default class PopupWithSubmit extends Popup {
       this._toggleBtnContent();
       this._funcSubmit()
         .then(() => this._toggleBtnContent())
-        .then(() => this.close());
+        .then(() => this.close())
+        .catch(err => {
+          console.log(err);
+        });
     });
   }
 

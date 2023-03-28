@@ -14,9 +14,7 @@ const profileInputJob = popUpProfileEdit.querySelector(
   '.pop-up__input_type_job',
 );
 const popUpFormAvatar = document.querySelector('.pop-up__form_data_avatar');
-const openPopupAvatarBtn = document.querySelector(
-  '.profile__btn_type_setAvatar',
-);
+const openPopupAvatarBtn = document.querySelector('.profile__btn_type_avatar');
 /* const popUpConfirm = document.querySelector('.pop-up_confirm'); */
 
 export {

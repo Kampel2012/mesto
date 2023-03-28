@@ -15,7 +15,10 @@ export default class PopupWithForm extends Popup {
       this._toggleBtnContent();
       this._funcSubmit(this._getInputValues())
         .then(() => this._toggleBtnContent())
-        .then(this.close());
+        .then(this.close())
+        .catch(err => {
+          console.log(err);
+        });
     });
   }
 
