@@ -116,6 +116,42 @@
       </div>
     </div>
 
+    <div class="pop-up pop-up_data_avatar">
+      <div class="pop-up__container">
+        <h2 class="pop-up__title pop-up__title_text_start">Обновить аватар</h2>
+        <button
+          type="button"
+          class="pop-up__btn pop-up__btn_type_close"
+          aria-label="Закрыть"
+        ></button>
+        <form
+          class="pop-up__form pop-up__form_data_avatar"
+          name="pop-up__form_data_avatar"
+          novalidate
+          autocomplete="off"
+        >
+          <fieldset class="pop-up__set">
+            <label class="pop-up__field">
+              <input
+                class="pop-up__input pop-up__input_type_placeLink"
+                type="url"
+                name="link"
+                id="pop-up__input-placeLink"
+                placeholder="Ссылка на аватар"
+                required
+              />
+              <span
+                class="pop-up__input-error pop-up__input-placeLink-error"
+              ></span>
+            </label>
+            <button class="pop-up__btn pop-up__btn_type_submit" type="submit">
+              Сохранить
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+
     <div class="pop-up pop-up_data_image-card">
       <div class="pop-up__container pop-up__container_data_image-card">
         <button

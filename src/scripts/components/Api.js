@@ -102,6 +102,25 @@ class Api {
       });
   }
 
+  editProfileAvatar({ link }) {
+    return fetch(`${this.baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this.headers,
+      body: JSON.stringify({
+        avatar: link,
+      }),
+    })
+      .then(res => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Ошибка: ${res.status}`);
+      })
+      .catch(err => {
+        console.log(err); // "Что-то пошло не так: ..."
+      });
+  }
+
   // другие методы работы с API
 }
 

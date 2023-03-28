@@ -15,6 +15,8 @@ import {
   popUpFormProfile,
   profileInputName,
   profileInputJob,
+  popUpFormAvatar,
+  openPopupAvatarBtn,
 } from '../scripts/utils/constants.js';
 
 // TODO TEST ZONE
@@ -34,20 +36,27 @@ export const gallerySection = new Section(
 
 import { api } from '../scripts/components/Api';
 import PopupWithSubmit from '../scripts/components/PopupWithSubmit';
-api.getUserInfoData().then(data => {
-  profileUserInfo.setUserInfo({
-    name: data.name,
-    job: data.about,
-    avatar: data.avatar,
-    _id: data._id,
-  });
-});
-api.getInitialCards().then(data => gallerySection.renderItems(data));
+api
+  .getUserInfoData()
+  .then(data => {
+    profileUserInfo.setUserInfo({
+      name: data.name,
+      job: data.about,
+      avatar: data.avatar,
+      _id: data._id,
+    });
+  })
+  .then(api.getInitialCards().then(data => gallerySection.renderItems(data)))
+  .catch(err => console.log(err));
 /* api.addNewCard().then(res => createCard(res)); */
 /* gallerySection.renderItems(); */
 // TODO TEST OVER
 
 const popupFullCard = new PopupWithImage('.pop-up_data_image-card');
+const popupAvatar = new PopupWithForm(
+  '.pop-up_data_avatar',
+  handleAvatarSubmit,
+);
 const popupCards = new PopupWithForm('.pop-up_data_cards', addNewCardInGallery);
 const popupProfile = new PopupWithForm(
   '.pop-up_data_profile',
@@ -59,14 +68,24 @@ const popupConfirm = new PopupWithSubmit(
 );
 
 let currentCardId = 0;
+let cardToDelete = '';
 
-function handleConfirmDel(id) {
+function handleAvatarSubmit(link) {
+  api.editProfileAvatar(link).then(res => profileUserInfo.setUserInfo(res));
+}
+
+function handleConfirmDel(id, card) {
   popupConfirm.open();
   currentCardId = id;
+  cardToDelete = card;
 }
 
 function handleSubmitConfirm(params) {
-  api.deleteCard(currentCardId);
+  api
+    .deleteCard(currentCardId)
+    .then(() => cardToDelete.remove())
+    .then(() => (cardToDelete = null))
+    .catch(err => console.log(err));
 }
 
 function exportPopUpEditProfileValuesToInputs() {
@@ -77,8 +96,7 @@ function exportPopUpEditProfileValuesToInputs() {
 }
 
 function importPopUpEditProfileValuesFromInputs(formInputs) {
-  api.editProfile(formInputs);
-  profileUserInfo.setUserInfo(formInputs);
+  api.editProfile(formInputs).then(profileUserInfo.setUserInfo(formInputs));
   // переносим значения из инпутов в графы профиля
 }
 
@@ -90,8 +108,14 @@ const validationFormPopupCards = new FormValidator(
   createValidationConfig(),
   popUpFormCards,
 );
+const validationFormPopupAvatar = new FormValidator(
+  createValidationConfig(),
+  popUpFormAvatar,
+);
+
 validationFormPopupProfile.enableValidation();
 validationFormPopupCards.enableValidation();
+validationFormPopupAvatar.enableValidation();
 
 function createCard(item) {
   let card = new Card(
@@ -107,7 +131,11 @@ function createCard(item) {
 }
 
 function addNewCardInGallery(formInputs) {
-  api.addNewCard(formInputs).then(res => createCard(res));
+  api
+    .addNewCard(formInputs)
+    .then(res => createCard(res))
+    .then(card => gallerySection.addItem(card))
+    .catch(err => console.log(err));
   /* gallerySection.addItem(createCard(formInputs)); */
 }
 
@@ -126,4 +154,10 @@ profileEditBtn.addEventListener('click', () => {
   validationFormPopupProfile.disableSubmitBtn();
   validationFormPopupProfile.removeValidationErrors();
   popupProfile.open();
+});
+
+openPopupAvatarBtn.addEventListener('click', () => {
+  popupAvatar.open();
+  validationFormPopupAvatar.disableSubmitBtn();
+  validationFormPopupAvatar.removeValidationErrors();
 });

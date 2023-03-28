@@ -12,7 +12,7 @@ export class Card {
     this._handleConfirmDel = handleConfirmDel;
     this._name = name;
     this._link = link;
-    this.likesOriginal = likes; // TODO переименовать
+    this._likesData = likes;
     this._likes = [...likes].length;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
@@ -29,7 +29,7 @@ export class Card {
       this._cardElement.querySelector('.card__counter');
     this._fillCardInfo();
     this._setCardHandling();
-    if (this._checkIsLike(this.likesOriginal)) {
+    if (this._checkIsLike(this._likesData)) {
       this._switchLikeActiveIfRequired();
     }
   }
@@ -60,12 +60,12 @@ export class Card {
     );
   }
 
-  _addCardtoServer() {
+  _deleteLikeFromCard() {
     api
       .switchStateLike(this._id, 'DELETE')
       .then(
         res => (
-          (this.likesOriginal = res.likes),
+          (this._likesData = res.likes),
           this._likes--,
           (this._cardCounterContainer.textContent = this._likes)
         ),
@@ -73,12 +73,12 @@ export class Card {
       .then(() => this._switchLikeActiveIfRequired());
   }
 
-  _deleteCardFromServer() {
+  _addLikeFromCard() {
     api
       .switchStateLike(this._id, 'PUT')
       .then(
         res => (
-          (this.likesOriginal = res.likes),
+          (this._likesData = res.likes),
           +this._likes++,
           (this._cardCounterContainer.textContent = this._likes)
         ),
@@ -88,15 +88,15 @@ export class Card {
 
   _setCardHandling() {
     this._cardButtonLike.addEventListener('click', () => {
-      if (this._checkIsLike(this.likesOriginal)) {
-        this._addCardtoServer();
+      if (this._checkIsLike(this._likesData)) {
+        this._deleteLikeFromCard();
       } else {
-        this._deleteCardFromServer();
+        this._addLikeFromCard();
       }
     });
     if (this._cardButtonDelete)
       this._cardButtonDelete.addEventListener('click', () => {
-        this._handleConfirmDel(this._id); // открытие поп-апа с подтверждением
+        this._handleConfirmDel(this._id, this.getCardElement()); // открытие поп-апа с подтверждением
         /*       this._removeCardIfRequired(); */
       });
     this._cardImage.addEventListener('click', () =>

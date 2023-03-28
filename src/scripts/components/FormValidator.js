@@ -3,11 +3,15 @@ export class FormValidator {
     this._config = config;
     this._elemForValid = elemForValid;
     this._inputList = this._makeListInputs();
-    this._buttonElement = this._elemForValid.querySelector(this._config.submitButtonSelector);
+    this._buttonElement = this._elemForValid.querySelector(
+      this._config.submitButtonSelector,
+    );
   }
 
   _makeListInputs() {
-    return Array.from(this._elemForValid.querySelectorAll(this._config.inputSelector));
+    return Array.from(
+      this._elemForValid.querySelectorAll(this._config.inputSelector),
+    );
   }
 
   _hasInvalidInput() {
@@ -15,14 +19,18 @@ export class FormValidator {
   }
 
   _showInputError(inputElement, errorMessage) {
-    const errorElement = this._elemForValid.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this._elemForValid.querySelector(
+      `.${inputElement.id}-error`,
+    );
     inputElement.classList.add(this._config.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._config.errorClass);
   }
 
   _hideInputError(inputElement) {
-    const errorElement = this._elemForValid.querySelector(`.${inputElement.id}-error`);
+    const errorElement = this._elemForValid.querySelector(
+      `.${inputElement.id}-error`,
+    );
     inputElement.classList.remove(this._config.inputErrorClass);
     errorElement.classList.remove(this._config.errorClass);
     errorElement.textContent = '';
