@@ -5,6 +5,10 @@ export default class UserInfo {
     this.avatar = document.querySelector(selectorAvatar);
   }
 
+  getUserId() {
+    return this._id;
+  }
+
   getUserInfo() {
     return {
       name: this.name.textContent,
@@ -24,8 +28,4 @@ export default class UserInfo {
     this.job.textContent = job;
     this.avatar.src = avatar;
   }
-
-  /*   setUserAvatar({ avatar }) {
-    this
-  } */
 }

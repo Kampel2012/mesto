@@ -4,30 +4,20 @@ class Api {
     this.headers = headers;
   }
 
+  _checkResponse(res) {
+    return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
+  }
+
   getUserInfoData() {
     return fetch(`${this.baseUrl}/users/me`, { headers: this.headers })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => {
-        console.log(err); // "Что-то пошло не так: ..."
-      });
+      .then(this._checkResponse)
+      .catch(err => console.log(err));
   }
 
   getInitialCards() {
     return fetch(`${this.baseUrl}/cards`, { headers: this.headers })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      .then(this._checkResponse)
+      .catch(err => console.log(err));
   }
 
   editProfile({ name, job }) {
@@ -39,15 +29,8 @@ class Api {
         about: job,
       }),
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      .then(this._checkResponse)
+      .catch(err => console.log(err));
   }
 
   addNewCard({ name, link }) {
@@ -59,15 +42,8 @@ class Api {
         link: link,
       }),
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      .then(this._checkResponse)
+      .catch(err => console.log(err));
   }
 
   deleteCard(id) {
@@ -75,15 +51,8 @@ class Api {
       method: 'DELETE',
       headers: this.headers,
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      .then(this._checkResponse)
+      .catch(err => console.log(err));
   }
 
   switchStateLike(id, state) {
@@ -91,15 +60,8 @@ class Api {
       method: state,
       headers: this.headers,
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      .then(this._checkResponse)
+      .catch(err => console.log(err));
   }
 
   editProfileAvatar({ link }) {
@@ -110,15 +72,8 @@ class Api {
         avatar: link,
       }),
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      .then(this._checkResponse)
+      .catch(err => console.log(err));
   }
 
   // другие методы работы с API

@@ -12,18 +12,13 @@ export default class PopupWithForm extends Popup {
     this._popupForm = this._popup.querySelector('.pop-up__form');
     this._popupForm.addEventListener('submit', e => {
       e.preventDefault();
-      this._toggleBtnContent();
-      this._funcSubmit(this._getInputValues())
-        .then(() => this._toggleBtnContent())
-        .then(this.close())
-        .catch(err => {
-          console.log(err);
-        });
+      this.toggleBtnContent();
+      this._funcSubmit(this._getInputValues());
     });
   }
 
-  _toggleBtnContent() {
-    let content = this._btnSubmit.innerText;
+  toggleBtnContent() {
+    const content = this._btnSubmit.innerText;
     if (content === 'Сохранить') {
       this._btnSubmit.innerText = 'Сохранение...';
     }

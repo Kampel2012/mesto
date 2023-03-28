@@ -5,6 +5,12 @@ export default class PopupWithSubmit extends Popup {
     super(selector);
     this._funcSubmit = funcSubmit;
     this._btnSubmit = this._popup.querySelector('.pop-up__btn_type_submit');
+    this._card = null;
+  }
+
+  open(card) {
+    super.open();
+    this._card = card;
   }
 
   setEventListeners() {
@@ -12,18 +18,13 @@ export default class PopupWithSubmit extends Popup {
     this._popupForm = this._popup.querySelector('.pop-up__form');
     this._popupForm.addEventListener('submit', e => {
       e.preventDefault();
-      this._toggleBtnContent();
-      this._funcSubmit()
-        .then(() => this._toggleBtnContent())
-        .then(() => this.close())
-        .catch(err => {
-          console.log(err);
-        });
+      this.toggleBtnContent();
+      this._funcSubmit(this._card);
     });
   }
 
-  _toggleBtnContent() {
-    let content = this._btnSubmit.innerText;
+  toggleBtnContent() {
+    const content = this._btnSubmit.innerText;
     if (content === 'Да') {
       this._btnSubmit.innerText = 'Удаление...';
     }
