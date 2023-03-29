@@ -90,6 +90,12 @@ export class Card {
     );
   }
 
+  updateLikeStatus(likes) {
+    this._likesData = likes;
+    this._cardCounterContainer.textContent = this._likesData.length;
+    this.switchLikeActiveIfRequired();
+  }
+
   removeCard() {
     this._cardElement.remove();
     this._cardElement = null;

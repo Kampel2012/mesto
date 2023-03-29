@@ -47,8 +47,8 @@ api
   .then(
     api
       .getInitialCards()
-      .catch(err => console.log(err))
-      .then(data => gallerySection.renderItems(data)),
+      .then(data => gallerySection.renderItems(data))
+      .catch(err => console.log(err)),
   )
   .catch(err => console.log(err));
 
@@ -105,13 +105,7 @@ function createCard(item) {
 function hendleForLikeBtn(requestType) {
   return api
     .switchStateLike(this._id, requestType)
-    .then(
-      res => (
-        (this._likesData = res.likes),
-        (this._cardCounterContainer.textContent = res.likes.length)
-      ),
-    )
-    .then(() => this.switchLikeActiveIfRequired())
+    .then(res => this.updateLikeStatus(res.likes))
     .catch(err => console.log(err));
 }
 
