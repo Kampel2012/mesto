@@ -174,3 +174,5 @@ openPopupAvatarBtn.addEventListener('click', () => {
   validationFormPopupAvatar.disableSubmitBtn();
   validationFormPopupAvatar.removeValidationErrors();
 });
+
+// TODO Тест проект
