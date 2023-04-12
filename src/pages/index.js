@@ -118,7 +118,7 @@ function exportPopUpEditProfileValuesToInputs() {
 function handleSubmitProfile(formInputs) {
   return api
     .editProfile(formInputs)
-    .then(profileUserInfo.setUserInfo(formInputs))
+    .then(res => profileUserInfo.setUserInfo(res))
     .catch(err => console.log(err))
     .then(this.close())
     .catch(err => console.log(err))
