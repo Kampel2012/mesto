@@ -39,7 +39,7 @@ api
   .then(data => {
     profileUserInfo.setUserInfo({
       name: data.name,
-      job: data.about,
+      about: data.about,
       avatar: data.avatar,
       _id: data._id,
     });
@@ -71,7 +71,6 @@ function handleAvatarSubmit(link) {
   api
     .editProfileAvatar(link)
     .then(res => profileUserInfo.setUserInfo(res))
-    .catch(err => console.log(err))
     .then(() => this.close())
     .catch(err => console.log(err))
     .finally(() => this.toggleBtnContent());
@@ -85,7 +84,6 @@ function handleSubmitConfirm(card) {
   return api
     .deleteCard(card.getCardId())
     .then(card.removeCard())
-    .catch(err => console.log(err))
     .then(() => this.close())
     .catch(err => console.log(err))
     .finally(() => this.toggleBtnContent());
@@ -118,9 +116,10 @@ function exportPopUpEditProfileValuesToInputs() {
 function handleSubmitProfile(formInputs) {
   return api
     .editProfile(formInputs)
-    .then(res => profileUserInfo.setUserInfo(res))
-    .catch(err => console.log(err))
-    .then(this.close())
+    .then(res => {
+      profileUserInfo.setUserInfo(res);
+    })
+    .then(() => this.close())
     .catch(err => console.log(err))
     .finally(() => this.toggleBtnContent());
 }
@@ -147,7 +146,7 @@ function addNewCardInGallery(formInputs) {
     .addNewCard(formInputs)
     .then(res => createCard(res))
     .then(card => gallerySection.addItem(card))
-    .then(this.close())
+    .then(() => this.close())
     .catch(err => console.log(err))
     .finally(() => this.toggleBtnContent());
 }
