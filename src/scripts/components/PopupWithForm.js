@@ -19,7 +19,27 @@ export default class PopupWithForm extends Popup {
 
   toggleBtnContent() {
     const content = this._btnSubmit.innerText;
-    if (content === 'Сохранить') {
+    const switchText = text => {
+      this._btnSubmit.innerText = text;
+    };
+    switch (content) {
+      case 'Сохранить':
+        switchText('Сохранение...');
+        break;
+      case 'Сохранение...':
+        switchText('Сохранить');
+        break;
+      case 'Создать':
+        switchText('Создание...');
+        break;
+      case 'Создание...':
+        switchText('Создать');
+        break;
+      default:
+        break;
+    }
+
+    /*         if (content === 'Сохранить') {
       this._btnSubmit.innerText = 'Сохранение...';
     }
     if (content === 'Сохранение...') {
@@ -30,7 +50,7 @@ export default class PopupWithForm extends Popup {
     }
     if (content === 'Создание...') {
       this._btnSubmit.innerText = 'Создать';
-    }
+    } */
   }
 
   _getInputValues() {
